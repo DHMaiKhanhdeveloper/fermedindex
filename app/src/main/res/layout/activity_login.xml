@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/colorPrimary"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    tools:context=".view.LoginActivity">
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:paddingTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            tools:ignore="ExtraText">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_login_head"
+                    style="@style/viewParent.headerText.NoMode"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/already_nhave_an_naccount" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie_online_doctor"
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/online_doctor" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_login_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:padding="6dp"
+                    android:text="Email"
+                    android:textColor="@color/themeColor"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/editText_login_doctor_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView_login_email"
+
+                    android:background="@drawable/border2"
+                    android:hint="Enter Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/textView_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText_login_doctor_email"
+                    android:layout_marginTop="10dp"
+                    android:padding="6dp"
+                    android:text="Password"
+                    android:textColor="@color/themeColor"
+                    android:textSize="16sp" />
+
+
+                <EditText
+                    android:id="@+id/editText_login_doctor_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView_login_password"
+                    android:background="@drawable/border2"
+                    android:drawableRight="@drawable/ic_baseline_visibility_off_24"
+                    android:hint="Enter Password"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:textSize="16dp">
+
+                </EditText>
+
+
+                <TextView
+                    android:id="@+id/forgot_password"
+                    style="@style/viewParent"
+                    android:layout_below="@+id/editText_login_doctor_password"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/forgot_password"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/newsMoreTextSize" />
+
+
+                <Button
+                    android:id="@+id/button_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText_login_doctor_password"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginRight="70dp"
+                    android:background="@drawable/background_patientp2"
+                    android:text="Login"
+                    android:textColor="@color/white" />
+
+
+
+                <TextView
+                    style="@style/parent"
+                    android:layout_below="@+id/button_login"
+                    android:layout_marginTop="@dimen/loginViewsMargin"
+                    android:onClick="onLogin1Click"
+                    android:text="@string/new_user_register_now"
+                    android:textAlignment="center"
+                    android:textColor="@color/themeColor"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    tools:ignore="UsingOnClickInXml" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:elevation="10dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

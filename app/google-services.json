@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "752818182810",
+    "project_id": "ferdindex",
+    "storage_bucket": "ferdindex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752818182810:android:ff59f0ca03ed3b2a03dd23",
+        "android_client_info": {
+          "package_name": "com.example.fer_medindex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752818182810-1simmcafeakn6i3849vr46ss7g21s7n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0K9BxSXh8RH-UMgeHImZsKC6N_PHnWdk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752818182810-1simmcafeakn6i3849vr46ss7g21s7n0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
