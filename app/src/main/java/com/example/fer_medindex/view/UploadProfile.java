@@ -18,14 +18,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fer_medindex.R;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UploadProfile extends AppCompatActivity {
     private ProgressBar progressBar;
@@ -58,6 +64,9 @@ public class UploadProfile extends AppCompatActivity {
         //Regular URIs.
         //Người dùng tải ảnh lên rồi
         Picasso.with(UploadProfile.this).load(uri).into(imageViewUploadPic);
+//        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference()
+//                .child("Registerd Users").child("imgaAvatar");
+//        referenceProfile.removeValue();
 
         // Chọn hình ảnh để tải lên
         buttonUploadPicChoose.setOnClickListener(new View.OnClickListener() {
@@ -79,35 +88,31 @@ public class UploadProfile extends AppCompatActivity {
 
     private void uploadPic() {
         if(uriImage != null){
-        // Save the image with uid of the currently logged user
-            // tham chiếu lưu trữ không gian lưu trữ , lựa chọn hiển thị vị trí lưu hình ảnh dưới dạng con và tên là uid người dùng
-            // cộng thêm phần mở rộng hình ảnh
-            StorageReference fileReference = storageReference.child(authProfile.getCurrentUser().getUid() + "." + getFileExtension(uriImage));
+            StorageReference fileReference = storageReference.child(getFileExtension(uriImage));
 
-            //Upload image to Storage
-            fileReference.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // đặt ảnh hồ sơ trong chế độ xem hình ảnh và tham chiếu cho hình ảnh này được lưu trữ trong tệp tham chiếu
-                    fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override // download ảnh về thành công
-                        public void onSuccess(Uri uri) {
-                            Uri downloaduri = uri;
-                            firebaseUser = authProfile.getCurrentUser();
+            fileReference.delete().addOnSuccessListener(aVoid -> fileReference.putFile(uriImage).addOnSuccessListener(taskSnapshot -> {
+                firebaseUser = authProfile.getCurrentUser();
+                // download ảnh về thành công
+                fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    //Finally set the display image of user after upload
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setPhotoUri(uri).build();
+                    firebaseUser.updateProfile(profileUpdates);
+                    DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
+                    referenceProfile.child(firebaseUser.getUid()).child("imgAvatar").setValue(uri.toString()).addOnSuccessListener(unused -> {
+                        //Quá trình upload diễn ra thành công
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(UploadProfile.this,"Upload Successful!",Toast.LENGTH_SHORT).show();
 
-                            //Finally set the display image of user after upload
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setPhotoUri(downloaduri).build();
-                            firebaseUser.updateProfile(profileUpdates);
-                        }
+                        Intent intent = new Intent(UploadProfile.this,BackgroundDoctor.class);
+                        startActivity(intent);
+                        finish();
                     });
-                    //Quá trình upload diễn ra thành công
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(UploadProfile.this,"Upload Successful!",Toast.LENGTH_SHORT).show();
+                });
+            })).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
 
-                    Intent intent = new Intent(UploadProfile.this,UserProfile.class);
-                    startActivity(intent);
-                    finish();
                 }
             });
         }
@@ -139,55 +144,7 @@ public class UploadProfile extends AppCompatActivity {
             // người dùng chọn hình ảnh trong dữ liệu điện thoại
             uriImage = data.getData();
             imageViewUploadPic.setImageURI(uriImage);
-
         }
     }
-    //Creating ActionBar Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Inflate menu items
-        getMenuInflater().inflate(R.menu.menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    //Menu Item được chọn
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // lấy id của mục menu được lưu trữ vào int id
-        int id = item.getItemId();
-        if(id == R.id.menu_refresh){
-            startActivity(getIntent());
-            finish();
-            overridePendingTransition(0,0);
-        } else if(id == R.id.menu_update_profile) {
-            Intent intent = new Intent(UploadProfile.this,UpdateProfile.class);
-            startActivity(intent);
-            finish(); // không muốn có nhiều hoạt động trùng lặp đang chạy
-        }else if (id == R.id.menu_update_email){
-            Intent intent = new Intent(UploadProfile.this,UpdateEmail.class);
-            startActivity(intent);
-            finish();
-        }/*else if (id == R.id.menu_settings) {
-            Toast.makeText(UserProfile.this,"menu_setting",Toast.LENGTH_SHORT).show();
-        }*/else if(id == R.id.menu_change_password){
-            Intent intent = new Intent(UploadProfile.this,ChangePassword.class);
-            startActivity(intent);
-            finish();
-        }/*else if(id==R.id.menu_delete_profile){
-            Intent intent = new Intent(UserProfile.this,DeleteProfile.class);
-            startActivity(intent);
-        }*/ else if(id == R.id.menu_logout){
-            authProfile.signOut();
-            Toast.makeText(UploadProfile.this,"Logged Out",Toast.LENGTH_SHORT).show();
-            //quay lại hoạt động chính của Activity
-            Intent intent = new Intent(UploadProfile.this,LoginActivity.class);
 
-            //Xoá ngăn sếp để ngăn người dùng quay lại hoạt động hồ sơ người dùng đã đăng xuất
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();// đóng UserProfile
-        }else{ // Nếu ko chọn item nào
-            Toast.makeText(UploadProfile.this,"Something went wrong!",Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

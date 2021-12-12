@@ -2,16 +2,12 @@ package com.example.fer_medindex.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 
@@ -25,15 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fer_medindex.adapter.AdapterUsers;
 import com.example.fer_medindex.R;
 import com.example.fer_medindex.view.AddActivity;
-import com.example.fer_medindex.view.ProfilePatient;
 import com.example.fer_medindex.view.ReadWritePatientDetails;
-import com.example.fer_medindex.view.Register_Patient;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.orhanobut.dialogplus.DialogPlus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,12 +65,10 @@ public class ListPatientFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AddActivity.class);
-                startActivity(intent);
-            }
+        floatingActionButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(),AddActivity.class);
+            intent.putExtra(AddActivity.TINH_TRANG_BENH, true);
+            startActivity(intent);
         });
 
         return view;
@@ -139,6 +130,8 @@ public class ListPatientFragment extends Fragment {
         adapterUsers.startListening();
         recyclerView.setAdapter(adapterUsers);
     }
+
+
 
 //    @Override
 //    public boolean onOptionsItemSelected(@NonNull MenuItem item) {

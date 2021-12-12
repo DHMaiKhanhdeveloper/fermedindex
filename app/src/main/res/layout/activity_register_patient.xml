@@ -281,11 +281,22 @@
             android:backgroundTint="@color/teal_200"
             android:src="@drawable/ic_baseline_camera_alt_24" />
 
+        <TextView
+            android:id="@+id/lable_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_camera"
+            android:layout_centerHorizontal="true"
+            android:background="@color/light_gray"
+            android:text="@string/cam_xuc"
+            android:textColor="@color/purple_700"
+            android:textSize="10pt" />
+
         <CheckBox
             android:id="@+id/checkbox_register_patient_CheckAgainst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_camera"
+            android:layout_below="@+id/lable_out"
             android:text="@string/cam_ket"
             android:textColor="#555555"
             android:textSize="16sp"
@@ -323,16 +334,7 @@
     <!--            android:layout_centerHorizontal="true"-->
     <!--            android:layout_below="@+id/checkbox_suc_khoe_tot"/>-->
 
-    <!--        <TextView-->
-    <!--            android:layout_below="@+id/button_camera"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_centerHorizontal="true"-->
-    <!--            android:id="@+id/lable_out"-->
-    <!--            android:textSize="10pt"-->
-    <!--            android:text="@string/cam_xuc"-->
-    <!--            android:background="@color/light_gray"-->
-    <!--            android:textColor="@color/purple_700"/>-->
+
 
     <!--        <ImageView-->
     <!--            android:id="@+id/image_camera"-->

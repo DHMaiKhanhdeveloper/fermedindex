@@ -160,7 +160,7 @@ public class UpdateEmail extends AppCompatActivity {
                     // Email đã cập nhật thành công vui lòng xác thực lại email
                     Toast.makeText(UpdateEmail.this,"Email has been updated . Please verify your new email",Toast.LENGTH_SHORT).show();
                     // bắt đầu hoạt động hồ sơ người dùng và đóng hoạt động email cập nhật
-                    Intent intent = new Intent(UpdateEmail.this,UserProfile.class);
+                    Intent intent = new Intent(UpdateEmail.this,LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }else {
@@ -175,60 +175,5 @@ public class UpdateEmail extends AppCompatActivity {
         });
     }
 
-    //Creating ActionBar Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Inflate menu items
-        getMenuInflater().inflate(R.menu.menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    //Menu Item được chọn
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // lấy id của mục menu được lưu trữ vào int id
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.menu_refresh:
-                startActivity(getIntent());
-                finish();
-                overridePendingTransition(0, 0);
-                break;
-            case R.id.menu_update_profile: {
-                Intent intent = new Intent(UpdateEmail.this, UpdateProfile.class);
-                startActivity(intent);
-                finish(); // không muốn có nhiều hoạt động trùng lặp đang chạy
 
-                break;
-            }
-            case R.id.menu_update_email: {
-                Intent intent = new Intent(UpdateEmail.this, UpdateEmail.class);
-                startActivity(intent);
-                finish();
-                break;
-            }
-            case R.id.menu_change_password: {
-                Intent intent = new Intent(UpdateEmail.this, ChangePassword.class);
-                startActivity(intent);
-                finish();
-                break;
-            }
-            case R.id.menu_logout: {
-                authProfile.signOut();
-                Toast.makeText(UpdateEmail.this, "Logged Out", Toast.LENGTH_SHORT).show();
-                //quay lại hoạt động chính của Activity
-                Intent intent = new Intent(UpdateEmail.this, LoginActivity.class);
-
-                //Xoá ngăn sếp để ngăn người dùng quay lại hoạt động hồ sơ người dùng đã đăng xuất
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();// đóng UserProfile
-
-                break;
-            }
-            default:  // Nếu ko chọn item nào
-                Toast.makeText(UpdateEmail.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

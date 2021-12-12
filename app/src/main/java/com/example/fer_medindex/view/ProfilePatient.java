@@ -30,15 +30,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfilePatient extends AppCompatActivity {
     private TextView textViewWelcome, textViewFullName, textViewGmail, textViewDoB, textViewGender, textViewMobile,
-            textViewCMND, textViewAddress, textViewStatus, textViewTime, textViewTinhTrangBenh , textViewCamXuc;
+            textViewCMND, textViewAddress, textViewStatus, textViewTime, textViewTinhTrangBenh, textViewCamXuc;
     private ProgressBar progressBar;
-    private String fullName, email, doB, gender, mobile, cmnd, address, status, createTime, TinhTrangBenh, camxuc;
+    private String fullName;
+    private String email;
+    private String doB;
+    private String gender;
+    private String mobile;
+    private String cmnd;
+    private String address;
+    private String status;
+    private String createTime;
+    private String TinhTrangBenh;
+    private String camxuc;
     private ImageView imageView;
     private FirebaseAuth authProfile;
     private CircleImageView imageView3;
@@ -61,16 +73,15 @@ public class ProfilePatient extends AppCompatActivity {
         textViewAddress = findViewById(R.id.textview_show_address);
         textViewStatus = findViewById(R.id.textview_show_status);
         textViewTime = findViewById(R.id.textview_show_time);
-        textViewCamXuc =findViewById(R.id.textview_show_emtions);
+        textViewCamXuc = findViewById(R.id.textview_show_emtions);
         progressBar = findViewById(R.id.progressBar);
+        textViewTinhTrangBenh = findViewById(R.id.textview_show_tinhtrangbenh);
         relativeLayoutTinhtrang = findViewById(R.id.relativeLayout_tinhtrang);
         authProfile = FirebaseAuth.getInstance();
         Intent intent = getIntent();
         String patientId = intent.getStringExtra(PATIENT_ID);
-
         if (intent.getBooleanExtra(IS_FULL_PROFILE, false)) {
-            if(intent.getBooleanExtra(TINH_TRANG_BENH, false)) {
-                //hien tinh trang benh o day
+            if (intent.getBooleanExtra(IS_SHOW_TINH_TRANG_BENH, false)) {
                 relativeLayoutTinhtrang.setVisibility(View.VISIBLE);
             }
             showUserProfileFromIntent();
@@ -83,8 +94,7 @@ public class ProfilePatient extends AppCompatActivity {
                         ReadWritePatientDetails readWritePatientDetails = task.getResult().getValue(ReadWritePatientDetails.class);
                         if (readWritePatientDetails != null) {
                             readWritePatientDetails.patientId = patientId;
-                            if(intent.getBooleanExtra(TINH_TRANG_BENH, false)) {
-                                //hien tinh trang benh o day
+                            if (intent.getBooleanExtra(IS_SHOW_TINH_TRANG_BENH, false)) {
                                 relativeLayoutTinhtrang.setVisibility(View.VISIBLE);
                             }
                             showUserProfileFromFirebase(readWritePatientDetails);
@@ -97,22 +107,24 @@ public class ProfilePatient extends AppCompatActivity {
             });
         }
         if (intent.getBooleanExtra(IS_DOCTOR, false)) {
-            // hien cai texxt view de nhap ten benh
             LinearLayout doctorView = findViewById(R.id.doctor_view);
             EditText tinhTrangBenh = findViewById(R.id.editText_chinh_sua);
             TinhTrangBenh = tinhTrangBenh.getText().toString();
-
+            if (intent.getBooleanExtra(IS_SHOW_TINH_TRANG_BENH, false)) {
+                relativeLayoutTinhtrang.setVisibility(View.VISIBLE);
+            }
+            if (TextUtils.isEmpty(TinhTrangBenh)) {
+                Toast.makeText(ProfilePatient.this, "Vui lòng nhập thông tin bệnh đầy đủ", Toast.LENGTH_LONG).show();
+                tinhTrangBenh.setError("Bắt buộc nhập thông tin tình trạng bệnh của bệnh nhân");
+                tinhTrangBenh.requestFocus();
+            }
             Button saveBtn = findViewById(R.id.save_btn);
 
             doctorView.setVisibility(View.VISIBLE);
             ReadWritePatientDetails readWritePatientDetails = new ReadWritePatientDetails(fullName, doB, gender, mobile, cmnd, email, address, status, imgHinh, TinhTrangBenh);
             readWritePatientDetails.patientId = patientId;
             saveBtn.setOnClickListener((v) -> {
-                if (TextUtils.isEmpty(TinhTrangBenh)) {
-                    Toast.makeText(ProfilePatient.this, "Vui lòng nhập thông tin bệnh đầy đủ", Toast.LENGTH_LONG).show();
-                    tinhTrangBenh.setError("Bắt buộc nhập thông tin tình trạng bệnh của bệnh nhân");
-                    tinhTrangBenh.requestFocus();
-                }
+
                 DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Patients");
                 referenceProfile.child(readWritePatientDetails.patientId).child("tinhtrangbenh").setValue(tinhTrangBenh.getText().toString()).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -131,11 +143,11 @@ public class ProfilePatient extends AppCompatActivity {
                         imgHinh = readWritePatientDetails.getImgHinh();
                         createTime = readWritePatientDetails.getCreateTimeString();
                         TinhTrangBenh = tinhTrangBenh.getText().toString();
+
                         StringBuilder outstr = new StringBuilder();
 
-                        for (Map.Entry<String,String> entry : readWritePatientDetails.getEmotions().entrySet()) {
-
-                            outstr.append(entry.getKey()).append(": ").append(entry.getValue()).append("%\n");
+                        for (Map.Entry<String, String> entry : ((Map<String, String>) intent.getSerializableExtra(EMOTION)).entrySet()) {
+                            outstr.append(entry.getKey()).append(": ").append(entry.getValue()).append("");
                         }
                         camxuc = outstr.toString();
 
@@ -177,9 +189,10 @@ public class ProfilePatient extends AppCompatActivity {
         createTime = intent.getStringExtra(CREATE_TIME);
         StringBuilder outstr = new StringBuilder();
 
-        for (Map.Entry<String,String> entry : ((Map<String,String>)intent.getSerializableExtra(EMOTION)).entrySet()) {
-            outstr.append(entry.getKey()).append(": ").append(entry.getValue()).append("%\n");
+        for (Map.Entry<String, String> entry : intent.getSerializableExtra(ProfilePatient.EMOTION) == null ? new HashMap<String, String>().entrySet() : ((Map<String, String>) intent.getSerializableExtra(ProfilePatient.EMOTION)).entrySet()) {
+            outstr.append(entry.getKey()).append(": ").append(entry.getValue()).append("");
         }
+
         camxuc = outstr.toString();
 
         textViewWelcome.setText("Chào mừng " + fullName);
@@ -193,6 +206,9 @@ public class ProfilePatient extends AppCompatActivity {
         textViewStatus.setText(status);
         textViewTime.setText(createTime);
         textViewCamXuc.setText(camxuc);
+        if (intent.getStringExtra(TINH_TRANG_BENH) != null) {
+            textViewTinhTrangBenh.setText(getIntent().getStringExtra(TINH_TRANG_BENH));
+        }
 
         Glide.with(getApplicationContext())
                 .load(imgHinh)
@@ -220,11 +236,10 @@ public class ProfilePatient extends AppCompatActivity {
                     createTime = readWritePatientDetails.getCreateTimeString();
                     StringBuilder outstr = new StringBuilder();
 
-                    for (Map.Entry<String,String> entry : readWritePatientDetails.getEmotions().entrySet()) {
-                        outstr.append(entry.getKey()).append(": ").append(entry.getValue()).append("%\n");
+                    for (Map.Entry<String, String> entry : readWritePatientDetails.getEmotions().entrySet()) {
+                        outstr.append(entry.getKey()).append(": ").append(entry.getValue()).append("");
                     }
                     camxuc = outstr.toString();
-
 
 
                     textViewWelcome.setText("Chào mừng " + fullName);
@@ -286,10 +301,11 @@ public class ProfilePatient extends AppCompatActivity {
     public static String IS_DOCTOR = "IS_DOCTOR";
 
     public static String IS_FULL_PROFILE = "IS_FULL_PROFILE";
+    public static String IS_SHOW_TINH_TRANG_BENH = "IS_SHOW_TINH_TRANG_BENH";
 
     public static String PATIENT_ID = "PATIENT_ID";
 
     public static String TINH_TRANG_BENH = "TINH_TRANG_BENH";
     public final static String FULLNAME = "FULLNAME", NGAYSINH = "NGAYSINH", GIOITINH = "GIOITINH", SODIENTHOAI = "SODIENTHOAI", CMND = "CMND", DIACHI = "DIACHI", EMAIL = "EMAIL",
-            TRANGTHAI = "TRANGTHAI", HINHANH = "HINHANH", CREATE_TIME = "CREATE_TIME", EMOTION ="EMOTION";
+            TRANGTHAI = "TRANGTHAI", HINHANH = "HINHANH", CREATE_TIME = "CREATE_TIME", EMOTION = "EMOTION";
 }

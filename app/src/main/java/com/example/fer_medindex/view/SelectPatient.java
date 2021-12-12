@@ -3,6 +3,7 @@ package com.example.fer_medindex.view;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +24,7 @@ public class SelectPatient extends AppCompatActivity {
             Intent intent = new Intent(SelectPatient.this, Register_Patient.class);
             startActivity(intent);
         });
+
         ImageView imageViewPatient = findViewById(R.id.xem_lai_form);
         imageViewPatient.setOnClickListener(v -> {
             ReadWritePatientDetails patientDetails = PatientFormInput.getForm();
@@ -39,6 +41,7 @@ public class SelectPatient extends AppCompatActivity {
                         .create()
                         .show();
             } else {
+                if(patientDetails.patientId!=null){
                 Intent intent = new Intent(SelectPatient.this, ProfilePatient.class);
                 intent.putExtra(ProfilePatient.IS_FULL_PROFILE , true);
                 intent.putExtra(ProfilePatient.PATIENT_ID, patientDetails.patientId);
@@ -55,12 +58,23 @@ public class SelectPatient extends AppCompatActivity {
                 intent.putExtra(ProfilePatient.EMOTION,(Serializable)patientDetails.getEmotions());
                 //put profile patient to intent
                 startActivity(intent);
+                }
             }
         });
+
         ImageView imageViewDanh_Sach = findViewById(R.id.danh_sach_benh_nhan);
         imageViewDanh_Sach.setOnClickListener(v -> {
             Intent intent = new Intent(SelectPatient.this,ListPatientActivity.class);
             startActivity(intent);
+        });
+
+        ImageView imageViewChinh_Sua_Form = findViewById(R.id.chinh_sua_form);
+        imageViewChinh_Sua_Form.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectPatient.this,Update_Profile_Patient.class);
+                startActivity(intent);
+            }
         });
     }
 }

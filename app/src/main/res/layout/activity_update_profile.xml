@@ -129,20 +129,9 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_profile_update_email"
-            android:background="@drawable/background_patientp2"
-            android:layout_below="@+id/button_upload_profile_pic"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"
-            android:text="update email"
-            android:textColor="@color/white"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/button_update_profile"
             android:background="@drawable/background_patientp2"
-            android:layout_below="@+id/button_profile_update_email"
+            android:layout_below="@+id/button_upload_profile_pic"
             android:layout_marginTop="20dp"
             android:layout_marginRight="70dp"
             android:layout_marginLeft="70dp"

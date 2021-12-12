@@ -1,5 +1,6 @@
 package com.example.fer_medindex.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.fer_medindex.R;
+import com.example.fer_medindex.view.ChangePassword;
 import com.example.fer_medindex.view.ReadWriteUserDetails;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -93,38 +96,9 @@ public class DoctorFragment extends Fragment {
         return view;
 
     }
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        setHasOptionsMenu(true);// show menu options in fragment
-//        super.onCreate(savedInstanceState);
-//    }
-//
-//    @Override
-//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-//        inflater.inflate(R.menu.search,menu);
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//        if(id == R.id.logout){
-//            firebaseAuth.signOut();
-//            checkUserStatus();
-//        }
-//        if(id== R.id.search){
-//
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    private void checkUserStatus() {
-//        FirebaseUser user = firebaseAuth.getCurrentUser();
-//        if(user != null){
-//
-//        }else{
-//            startActivity(new Intent(getActivity(), Register_Patient.class));
-//            getActivity().finish();
-//        }
-//    }
+
+
+
+
+
 }

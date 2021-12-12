@@ -84,35 +84,36 @@ public class Register_Patient extends AppCompatActivity {
     private CheckBox checkBoxHo, checkBoxSot, checkBoxKhotho, checkboxdaunguoi, checkboxsuckhoetot, checkboxcamket;
     private DatePickerDialog picker;
     private FirebaseDatabase firebaseDatabase;
-    ImageView button_camera;
-    KProgressHUD hud;
-    ImageView imageProfile;
+    private ImageView button_camera;
+    private KProgressHUD hud;
+    private ImageView imageProfile;
 
     private StorageReference reference = FirebaseStorage.getInstance().getReference();
-    Uri uriImage;
+    private Uri uriImage;
     public static final int REQUEST_CODE_CAMERA = 456;
     public static final int SELECT_PICTURE = 123;
 
     private static final int REQUEST_PHOTO_GALLERY = 100;
     private static final int REQUEST_CAPTURE_IMAGE = 110;
     private static final String TAG = "RegisterActivity";
-    String textFullName;
-    String textEmail;
-    String textDoB;
-    String textMobile;
-    String textCMND;
-    String textAddress;
-    String textHo;
-    String textSot;
-    String textKhotho;
-    String textDaunguoi;
-    String textSuckhoetot;
-    String textcamket;
-    String mobileRegex;
-    Matcher mobileMatcher;
-    Pattern mobilePattern;
-    String textGender;
+    private String textFullName;
+    private String textEmail;
+    private String textDoB;
+    private String textMobile;
+    private String textCMND;
+    private String textAddress;
+    private String textHo;
+    private String textSot;
+    private String textKhotho;
+    private String textDaunguoi;
+    private String textSuckhoetot;
+    private String textcamket;
+    private String mobileRegex;
+    private Matcher mobileMatcher;
+    private Pattern mobilePattern;
+    private String textGender;
     private Map<String,String> emotions;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -266,7 +267,7 @@ public class Register_Patient extends AppCompatActivity {
         checkboxdaunguoi = findViewById(R.id.checkbox_dau_nguoi);
         checkboxsuckhoetot = findViewById(R.id.checkbox_suc_khoe_tot);
         progressBar = findViewById(R.id.progressBar);
-
+        lable_out = findViewById(R.id.lable_out);
         checkboxcamket = findViewById(R.id.checkbox_register_patient_CheckAgainst);
 
         radioGroupRegisterGender = findViewById(R.id.radio_group_register_patient_gender);
@@ -471,15 +472,12 @@ public class Register_Patient extends AppCompatActivity {
                 // Releases model resources if no longer used.
                 model.close();
 
-                this.emotions = new HashMap<>();
+                StringBuilder outstr = new StringBuilder();
 
-
-                for (Category item : probability){
-                    emotions.put(item.getLabel(),String.valueOf(item.getScore()*100)+"%");
-
+                for (Category item : probability) {
+                    outstr.append(item.getLabel()).append(": ").append(String.valueOf(item.getScore()*100)).append("%\n");
                 }
-
-
+                lable_out.setText(outstr.toString());
             } catch (IOException e) {
                 // TODO Handle the exception
             }
@@ -573,59 +571,6 @@ public class Register_Patient extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-//    {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == MY_CAMERA_PERMISSION_CODE)
-//        {
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-//            {
-//                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-//                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-//            }
-//            else
-//            {
-//                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
 
-//    @SuppressLint("SetTextI18n")
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-//            Bitmap photo = (Bitmap) data.getExtras().get("data");
-//            img.setImageBitmap(photo);
-////
-//            try {
-//                Model model = Model.newInstance(Register_Patient.this);
-//
-//                // Creates inputs for reference.
-//                TensorImage image = TensorImage.fromBitmap(photo);
-//
-//                // Runs model inference and gets result.
-//                Model.Outputs outputs = model.process(image);
-//                List<Category> probability = outputs.getProbabilityAsCategoryList();
-//
-//                // Releases model resources if no longer used.
-//                model.close();
-//
-//                StringBuilder outstr = new StringBuilder();
-//
-//
-//                for (Category item : probability){
-//                    outstr.append(item.getLabel()).append(": ").append(item.getScore() * 100).append("%\n");
-//                }
-//                lable_out.setText(outstr.toString());
-//
-//            } catch (IOException e) {
-//                // TODO Handle the exception
-//            }
-//
-//        }
-//    }
 
 }

@@ -62,4 +62,5 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:6.3.0'
     implementation 'com.orhanobut:dialogplus:1.11@aar'
     implementation 'com.google.android.material:material:1.2.1'
+
 }

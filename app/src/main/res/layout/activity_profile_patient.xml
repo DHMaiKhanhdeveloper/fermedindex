@@ -450,7 +450,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_below="@+id/divider_time">
+                        android:layout_below="@+id/divider_emtions">
                         <ImageView
                             android:id="@+id/ic_tinh_trang_benh"
                             android:layout_width="35dp"

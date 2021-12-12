@@ -19,16 +19,17 @@
             android:src="@drawable/k1"
             app:civ_border_width="2dp"
             app:civ_circle_background_color="#FF000000" />
+
         <TextView
+            android:id="@+id/TextViewName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/TextViewName"
-            android:text="Họ và tên"
-            android:textSize="25sp"
-            android:textStyle="bold"
             android:layout_marginLeft="10dp"
-           android:layout_toRightOf="@+id/img1"
-            android:textColor="#000" />
+            android:layout_toRightOf="@+id/img1"
+            android:text="Họ và tên"
+            android:textColor="#000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

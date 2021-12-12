@@ -21,13 +21,14 @@
             android:layout_weight="1"
             android:layout_marginBottom="0dp"
             tools:ignore="NestedWeights,UselessParent">
+
             <com.example.fer_medindex.custom.LobsterTwo_Italic
                 android:layout_width="1100dp"
                 android:layout_height="300dp"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="70dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
                 android:text="@string/hay_dang_ky_form"
                 android:textColor="@color/black"
                 android:textSize="40sp"
@@ -125,6 +126,53 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="@string/xem_lai_form"
+                        android:textColor="#0C0C0C"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            tools:ignore="NestedWeights,UselessParent">
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/background_patientp1">
+
+                <ImageView
+                    android:id="@+id/chinh_sua_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/background_patientp1"
+                    app:tint="#68000000" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/background_patientp1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="CHỈNH SỬA FORM "
                         android:textColor="#0C0C0C"
                         android:textSize="30sp"
                         android:textStyle="bold" />

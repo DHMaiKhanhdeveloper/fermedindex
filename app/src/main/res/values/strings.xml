@@ -49,4 +49,6 @@
     <string name="xem_lai_form">XEM LẠI FORM</string>
     <string name="thong_tin_ben_nhan">Thông tin bệnh nhân</string>
     <string name="cam_xuc">Cảm xúc của bạn?\nVui chụp khuôn mặt của bạn!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

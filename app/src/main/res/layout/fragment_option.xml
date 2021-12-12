@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.OptionFragment"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/doi_avatar"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đổi avatar"
+        android:textColor="#000"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/sua_thong_tin"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sửa thông tin"
+        android:textColor="#000"
+        android:textSize="14sp"
+        android:background="@drawable/background_patientp2"/>
+
+    <Button
+        android:id="@+id/doi_mat_khau"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đổi mật khẩu"
+        android:textColor="#000"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/dang_xuat"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng xuất"
+        android:textColor="#000"
+        android:textSize="14sp" />
+
+
+
+
+
+
+</LinearLayout>

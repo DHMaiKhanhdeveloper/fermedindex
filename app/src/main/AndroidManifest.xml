@@ -22,10 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".view.Update_Profile_Patient"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".view.RegisterActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <!-- tools:ignore="AllowBackup" -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- tools:ignore="AllowBackup" -->
         <activity
             android:name=".view.AddActivity"
             android:exported="true" />
@@ -47,10 +50,10 @@
         <activity
             android:name=".view.ForgotPassword"
             android:exported="true" />
-        <activity
-            android:name=".view.UserProfile"
-            android:exported="true"
-            android:theme="@style/AppTheme" />
+<!--        <activity-->
+<!--            android:name=".view.UserProfile"-->
+<!--            android:exported="true"-->
+<!--            android:theme="@style/AppTheme" />-->
         <activity
             android:name=".view.ProfilePatient"
             android:exported="true"

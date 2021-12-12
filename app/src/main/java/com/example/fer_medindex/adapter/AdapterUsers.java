@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -141,14 +142,11 @@ public class AdapterUsers extends FirebaseRecyclerAdapter<ReadWritePatientDetail
             intent.putExtra(ProfilePatient.HINHANH,model.getImgHinh());
             //put profile patient to intent
             intent.putExtra(ProfilePatient.CREATE_TIME, model.getCreateTimeString());
+            intent.putExtra(ProfilePatient.EMOTION,(Serializable) model.getEmotions());
             fragment.requireActivity().startActivity(intent);
 
 
-//            AppCompatActivity appCompatActivity = (AppCompatActivity) v.getContext();
-//
-//            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_list_patient, UserFragment.create(model.getFullname(), model.getNgaysinh(), model.getGioitinh(), model.getSodienthoai(), model.getCMND(), model.getDiachi(), model.getEmail(), model.getTrangthai(), model.getImgHinh())).addToBackStack(null).commit();
-//                Intent intent = new Intent( ListPatientFragment.this.getActivity ()
-//                        ,UserFragment.class );
+
         });
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override

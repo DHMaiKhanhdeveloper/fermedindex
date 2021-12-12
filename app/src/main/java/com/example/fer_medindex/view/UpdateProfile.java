@@ -28,15 +28,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UpdateProfile extends AppCompatActivity {
 
-    private EditText editTextUpdateName , editTextUpdateDoB, editTextUpdateMobile;
+    private EditText editTextUpdateName, editTextUpdateDoB, editTextUpdateMobile;
     private RadioGroup radioGroupUpdateGender;
     private RadioButton radioButtonUpdateGenderSelected;
-    private String textFullName , textDoB , textGender , textMobile;
+    private String textFullName, textDoB, textGender, textMobile, textGmail;
     private FirebaseAuth authProfile;
     private ProgressBar progressBar;
 
@@ -57,30 +59,20 @@ public class UpdateProfile extends AppCompatActivity {
         // lấy người dùng hiện đang đăng nhập bằng sử dụng hồ sơ auth
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
         //Show profile data
-      showProfile(firebaseUser);
+        showProfile(firebaseUser);
 
-      //Upload Profile Pic
+        //Upload Profile Pic
         Button buttonUploadProfilePic = findViewById(R.id.button_upload_profile_pic);
         buttonUploadProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateProfile.this,UploadProfile.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        //Update Email
-        Button buttonUploadEmail = findViewById(R.id.button_profile_update_email);
-        buttonUploadEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UpdateProfile.this,UpdateEmail.class);
+                Intent intent = new Intent(UpdateProfile.this, UploadProfile.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        //setting up DatePicker on EditText
+
         editTextUpdateDoB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +81,7 @@ public class UpdateProfile extends AppCompatActivity {
                 String textSADoB[] = textDoB.split("/");
                 //Integer.parseInt chuyển String thành Integer
                 int day = Integer.parseInt(textSADoB[0]);
-                int month = Integer.parseInt(textSADoB[1])-1; // tháng trong mảng index bắt đầu từ 0
+                int month = Integer.parseInt(textSADoB[1]) - 1; // tháng trong mảng index bắt đầu từ 0
                 int year = Integer.parseInt(textSADoB[2]);
 
                 DatePickerDialog picker;
@@ -98,9 +90,9 @@ public class UpdateProfile extends AppCompatActivity {
                 picker = new DatePickerDialog(UpdateProfile.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        editTextUpdateDoB.setText(dayOfMonth+ "/"+(month+1)+"/"+year);
+                        editTextUpdateDoB.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
-                },year,month,day); // 3 tham số xác định
+                }, year, month, day); // 3 tham số xác định
                 picker.show();
             }
         });
@@ -114,6 +106,7 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
     }
+
     // Update Profile
     private void updateProfile(FirebaseUser firebaseUser) {
         int selectedGenderID = radioGroupUpdateGender.getCheckedRadioButtonId();
@@ -121,33 +114,33 @@ public class UpdateProfile extends AppCompatActivity {
         radioButtonUpdateGenderSelected = findViewById(selectedGenderID);
 
         //Xác thực điện thoại di động sử dụng Matcher và Pattern
-        String mobileRegex ="[0][0-9]{9}";
+        String mobileRegex = "[0][0-9]{9}";
         Matcher mobileMatcher;
         Pattern mobilePattern = Pattern.compile(mobileRegex); // xác định mẫu di động
         mobileMatcher = mobilePattern.matcher(textMobile);
 
-        if(TextUtils.isEmpty(textFullName)){
-            Toast.makeText(UpdateProfile.this,"Please enter your full name",Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(textFullName)) {
+            Toast.makeText(UpdateProfile.this, "Please enter your full name", Toast.LENGTH_LONG).show();
             editTextUpdateName.setError("Full Name is required");
             editTextUpdateName.requestFocus();// yeu cau nhap lai
-        }   else if (TextUtils.isEmpty(textDoB)) {
-            Toast.makeText(UpdateProfile.this,"Please enter date of birth",Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(textDoB)) {
+            Toast.makeText(UpdateProfile.this, "Please enter date of birth", Toast.LENGTH_LONG).show();
             editTextUpdateDoB.setError("Date of birth is required");
             editTextUpdateDoB.requestFocus();
-        }else if (TextUtils.isEmpty(radioButtonUpdateGenderSelected.getText())){
-            Toast.makeText(UpdateProfile.this,"Please select your gender",Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(radioButtonUpdateGenderSelected.getText())) {
+            Toast.makeText(UpdateProfile.this, "Please select your gender", Toast.LENGTH_LONG).show();
             radioButtonUpdateGenderSelected.setError("Gender is required");
             radioButtonUpdateGenderSelected.requestFocus();
-        }else if(TextUtils.isEmpty(textMobile)) {
-            Toast.makeText(UpdateProfile.this,"Please enter your mobile ",Toast.LENGTH_LONG).show();
+        } else if (TextUtils.isEmpty(textMobile)) {
+            Toast.makeText(UpdateProfile.this, "Please enter your mobile ", Toast.LENGTH_LONG).show();
             editTextUpdateMobile.setError("Mobile is required");
             editTextUpdateMobile.requestFocus();
-        }else if(textMobile.length() !=10){
-            Toast.makeText(UpdateProfile.this,"Please re-enter your mobile ",Toast.LENGTH_LONG).show();
+        } else if (textMobile.length() != 10) {
+            Toast.makeText(UpdateProfile.this, "Please re-enter your mobile ", Toast.LENGTH_LONG).show();
             editTextUpdateMobile.setError("Mobile shoule be 10 digits");
             editTextUpdateMobile.requestFocus();
-        }else if(!mobileMatcher.find()){
-            Toast.makeText(UpdateProfile.this,"Please re-enter your mobile ",Toast.LENGTH_LONG).show();
+        } else if (!mobileMatcher.find()) {
+            Toast.makeText(UpdateProfile.this, "Please re-enter your mobile ", Toast.LENGTH_LONG).show();
             editTextUpdateMobile.setError("Mobile is not valid");
             editTextUpdateMobile.requestFocus();
         } else {
@@ -157,42 +150,42 @@ public class UpdateProfile extends AppCompatActivity {
             textDoB = editTextUpdateDoB.getText().toString();
             textMobile = editTextUpdateMobile.getText().toString();
 
+
             //Enter User Data into the Firebase Realtime Database .Set up dependencies
             // Ghi những thông tin người dùng nhập vào cơ sở dữ liệu
-            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textFullName,textDoB,textGender,textMobile);
-            // Extract User reference from Database for " Registered Users"
-            // Trích xuất một tham chiếu người dùng từ cơ sở dữ liệu cho người dùng đã đăng ký
+            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(textFullName, textDoB, textGender, textMobile);
+
             DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
-            // Lấy id của người dùng // firebase cha
+
             String userID = firebaseUser.getUid();
 
             progressBar.setVisibility(View.VISIBLE);
-            // Tham chiếu vào firebase con chuyển id người dùng bằng phương thức set value
-            referenceProfile.child(userID).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){ //ngày sinh , giới tính, mobile ,gender đã được ghi thành công vào cơ sở dữ liệu
-                        //Setting new display name Cập nhật tên hiển thị vào đối tượng người dùng firebase
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().
-                                setDisplayName(textFullName).build();
-                        firebaseUser.updateProfile(profileUpdates);
+            Map<String, Object> dataUpdate = new HashMap<>();
+            dataUpdate.put("fullName", writeUserDetails.getFullName());
+            dataUpdate.put("doB", writeUserDetails.getDoB());
+            dataUpdate.put("gender", writeUserDetails.getGender());
+            dataUpdate.put("mobile", writeUserDetails.getMobile());
+            referenceProfile.child(userID).updateChildren(dataUpdate).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    //Setting new display name Cập nhật tên hiển thị vào đối tượng người dùng firebase
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().
+                            setDisplayName(textFullName).build();
+                    firebaseUser.updateProfile(profileUpdates);
 
-                        Toast.makeText(UpdateProfile.this, "Update Successful!", Toast.LENGTH_SHORT).show();
-                        //Quay lại hồ sơ cập nhật sau khi cập nhật thành công
-                        // Stop user from returning to UpdateProfileActivity on pressing back button and close Activity
-                        Intent intent = new Intent(UpdateProfile.this,UserProfile.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    }else {
-                        try{
-                            throw task.getException();
-                        }catch (Exception e){
-                            Toast.makeText(UpdateProfile.this, e.getMessage(),Toast.LENGTH_LONG).show();
-                        }
+                    Toast.makeText(UpdateProfile.this, "Update Successful!", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(UpdateProfile.this, BackgroundDoctor.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    try {
+                        throw task.getException();
+                    } catch (Exception e) {
+                        Toast.makeText(UpdateProfile.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-                    progressBar.setVisibility(View.GONE);
                 }
+                progressBar.setVisibility(View.GONE);
             });
         }
 
@@ -201,47 +194,47 @@ public class UpdateProfile extends AppCompatActivity {
     // nạp dữ liệu từ cơ sở dữ liệu
     private void showProfile(FirebaseUser firebaseUser) {
         String userIDofRegistered = firebaseUser.getUid();
-        // Nút tham chiếu từ cơ sở dữ liệu cho người dùng đã đăng ký
-        //Extracting User Reference from database for :" Registered Users"
-        // Hồ sơ tham chiếu đến csdl lấy dữ liệu firebase
+
         DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
-        // lớp cha uid và lớp con id
+
         progressBar.setVisibility(View.VISIBLE);
-      referenceProfile.child(userIDofRegistered).addListenerForSingleValueEvent(new ValueEventListener() {
-          @Override
-          public void onDataChange(@NonNull DataSnapshot snapshot) {
-              // Đọc và ghi chi tiết người dùng bằng snapshot
+        referenceProfile.child(userIDofRegistered).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 ReadWriteUserDetails readUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
-              if( readUserDetails != null) {
-                  textFullName = firebaseUser.getDisplayName();
-                  textDoB = readUserDetails.getDoB();
-                  textGender = readUserDetails.getGender();
-                  textMobile = readUserDetails.getMobile();
-
-                  editTextUpdateName.setText(textFullName);
-                  editTextUpdateDoB.setText(textDoB);
-                  editTextUpdateMobile.setText(textMobile);
-
-                  //Show Gender through Radio Button
-                  if(textGender.equals("Male")){ // Kiem tra neu gender = nam
-                      radioButtonUpdateGenderSelected = findViewById(R.id.radio_update_male);
-                  } else {
-                      radioButtonUpdateGenderSelected = findViewById(R.id.radio_update_female);
-                  }
-                  radioButtonUpdateGenderSelected.setChecked(true);
-              }else{
-                  Toast.makeText(UpdateProfile.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-              }
-              progressBar.setVisibility(View.GONE);
+                if (readUserDetails != null) {
+                    textFullName = readUserDetails.getFullName();
+                    textDoB = readUserDetails.getDoB();
+                    textGender = readUserDetails.getGender();
+                    textMobile = readUserDetails.getMobile();
 
 
-          }
+                    editTextUpdateName.setText(textFullName);
+                    editTextUpdateDoB.setText(textDoB);
+                    editTextUpdateMobile.setText(textMobile);
+//                  firebaseUser.getEmail();
 
-          @Override
-          public void onCancelled(@NonNull DatabaseError error) {
-              Toast.makeText(UpdateProfile.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-              progressBar.setVisibility(View.GONE);
-          }
-      });
+
+                    if (textGender.equals("Male")) {
+                        radioButtonUpdateGenderSelected = findViewById(R.id.radio_update_male);
+                    } else {
+                        radioButtonUpdateGenderSelected = findViewById(R.id.radio_update_female);
+                    }
+                    radioButtonUpdateGenderSelected.setChecked(true);
+                } else {
+                    Toast.makeText(UpdateProfile.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                }
+                progressBar.setVisibility(View.GONE);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UpdateProfile.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 }
