@@ -32,7 +32,7 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-     getSupportActionBar().setTitle("Forgot Password");
+     getSupportActionBar().setTitle("Quên mật khẩu");
 
         editTextPwdResetEmail = findViewById(R.id.editText_password_reset_email);
         buttonPwdReset = findViewById(R.id.button_password_reset);
@@ -44,12 +44,12 @@ public class ForgotPassword extends AppCompatActivity {
                 String email = editTextPwdResetEmail.getText().toString();
                 
                 if(TextUtils.isEmpty(email)){
-                    Toast.makeText(ForgotPassword.this, "Please enter your registered email", Toast.LENGTH_SHORT).show();
-                    editTextPwdResetEmail.setError("Email is required");
+                    Toast.makeText(ForgotPassword.this, "Vui lòng nhập email đã đăng ký của bạn", Toast.LENGTH_SHORT).show();
+                    editTextPwdResetEmail.setError("Nhập Email cần thiết");
                     editTextPwdResetEmail.requestFocus();
                 }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){ // đúng mẫu email
-                    Toast.makeText(ForgotPassword.this, "Please enter valid email", Toast.LENGTH_SHORT).show();
-                    editTextPwdResetEmail.setError("Valid email is required");
+                    Toast.makeText(ForgotPassword.this, "Vui lòng nhập email hợp lệ", Toast.LENGTH_SHORT).show();
+                    editTextPwdResetEmail.setError("Email hợp lệ là bắt buộc");
                     editTextPwdResetEmail.requestFocus();
                 }else {
                     progressBar.setVisibility(View.VISIBLE);
@@ -61,27 +61,25 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     private void resetPassword(String email) {
-        authProfile = FirebaseAuth.getInstance(); // xác thực  firebase
+        authProfile = FirebaseAuth.getInstance();
         //nhận email đặt lại mật khẩu trong hộp thư của mình
         authProfile.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    //Vui lòng kiểm tra hộp thư đến của bạn để biết liên kết đặt lại mật khẩu
-                    Toast.makeText(ForgotPassword.this, "Please check your inbox for password reset link", Toast.LENGTH_SHORT).show();
-                    //Mở hồ sơ người dùng
-                    //quay lại hoạt động chính của Activity mà không bị giữ lại hoạt động quên mật khẩu
+                    Toast.makeText(ForgotPassword.this, "Vui lòng kiểm tra hộp thư đến của bạn để biết liên kết đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(ForgotPassword.this,LoginActivity.class);
 
                     //Xoá ngăn sếp để ngăn người dùng quay lại hoạt động hồ sơ người dùng đã đăng xuất
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    finish();// đóng UserProfile
+                    finish();
                 }else {
                     try{
                         throw task.getException();
                     } catch (FirebaseAuthInvalidUserException e){
-                        editTextPwdResetEmail.setError("User does not exists or is no longer valid. Please register again");
+                        editTextPwdResetEmail.setError("Người dùng không tồn tại hoặc không còn hợp lệ. Vui lòng đăng ký lại");
                         editTextPwdResetEmail.requestFocus();
                     }catch (Exception e){
                         Log.e(TAG,e.getMessage());

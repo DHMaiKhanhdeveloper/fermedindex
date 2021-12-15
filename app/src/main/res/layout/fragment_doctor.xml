@@ -156,7 +156,7 @@
                         android:layout_alignStart="@+id/ic_dob"
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="10dp"
-                        android:text="Ngày sinh"
+                        android:text="Ngày tháng năm sinh"
                         android:textSize="18sp" />
 
                     <TextView

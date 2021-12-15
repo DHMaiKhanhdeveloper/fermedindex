@@ -68,13 +68,5 @@ public class SelectPatient extends AppCompatActivity {
             startActivity(intent);
         });
 
-        ImageView imageViewChinh_Sua_Form = findViewById(R.id.chinh_sua_form);
-        imageViewChinh_Sua_Form.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SelectPatient.this,Update_Profile_Patient.class);
-                startActivity(intent);
-            }
-        });
     }
 }

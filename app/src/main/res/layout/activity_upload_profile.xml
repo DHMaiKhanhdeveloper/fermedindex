@@ -11,43 +11,43 @@
         android:padding="15dp"
         android:layout_margin="15dp"
         android:background="@color/white">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/textView_upload_pic_head"
-            android:text="Upload your profile picture"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
-        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/upload_pic_choose_button"
+            android:text="Bạn có thể cập nhật hình ảnh của mình ngay bây giờ."
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <ImageView
+            android:id="@+id/imagePatient"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_below="@+id/textView_upload_pic_head"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"
-            android:text="Choose Picture"
-            android:textColor="@color/white"
-            android:background="@drawable/background_patientp2"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_baseline_camera_alt_24" />
 
         <ImageView
             android:id="@+id/imageView_upload_profile_user"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_below="@id/upload_pic_choose_button"
-            android:layout_marginTop="20dp"
+            android:layout_below="@id/imagePatient"
+
             android:background="@drawable/border1" />
+
         <Button
+            android:id="@+id/upload_pic_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/upload_pic_button"
-            android:layout_marginTop="10dp"
             android:layout_below="@+id/imageView_upload_profile_user"
-            android:layout_marginRight="70dp"
             android:layout_marginLeft="70dp"
-            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="70dp"
             android:background="@drawable/background_patientp2"
-            android:text="Upload"/>
+            android:text="Cập nhật"
+            android:textColor="@color/white" />
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"

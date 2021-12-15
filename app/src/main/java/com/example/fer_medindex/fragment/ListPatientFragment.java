@@ -101,12 +101,9 @@ public class ListPatientFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //called when user press seach button form key board
-                //if search query is not empty then search (nếu thanh tìm kiếm có chữ nhấn search)
-                //  if(!TextUtils.isEmpty(query.trim())) { // trim bỏ những khoảng cách ở đầu và cuối
-                // search text contains text , search ít
+
                 SearchUsers(query);
-                //  }
+
                 return false;
             }
 
@@ -132,20 +129,6 @@ public class ListPatientFragment extends Fragment {
     }
 
 
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//        if(id == R.id.logout){
-//            firebaseAuth.signOut();
-//            checkUserStatus();
-//        }
-////        if(id== R.id.search){
-////
-////        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     private void checkUserStatus() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user != null){
@@ -156,41 +139,6 @@ public class ListPatientFragment extends Fragment {
         }
     }
 
-//    public void onPlaceClick(int position) {
-//        Intent intent = new Intent( ListPatientFragment.this.getActivity ()
-//                ,UserFragment.class );
-//        intent.putExtra("Place Item", position);
-//        startActivity ( intent );
-//    }
-    private void getAllUsers() {
 
-//        //get current user
-//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//        //get path of database named "" containing users info
-//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Patients");
-//        //get all data from path
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                usersList.clear();
-//                for (DataSnapshot ds: snapshot.getChildren()){
-//                    ReadWritePatientDetails readWritePatientDetails = ds.getValue(ReadWritePatientDetails.class);
-//
-//                    if(!readWritePatientDetails.getPatientId().equals(firebaseUser.getUid())){
-//                        usersList.add(readWritePatientDetails);
-//                    }
-//                    // adapter
-//                    adapterUsers = new AdapterUsers(getActivity(),usersList);
-//                    // set adapter to recycler view
-//                    recyclerView.setAdapter(adapterUsers);
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-    }
+
 }

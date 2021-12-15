@@ -16,8 +16,7 @@ public class Background extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             startActivity(new Intent(Background.this, BackgroundDoctor.class));
-            finish(); // đóng LoginActivity
-            // mở hồ sơ người dùng
+            finish();
             return;
         }
         setContentView(R.layout.activity_background);

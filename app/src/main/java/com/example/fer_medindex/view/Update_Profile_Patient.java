@@ -156,27 +156,6 @@ public class Update_Profile_Patient extends AppCompatActivity {
 
         buttonUpdate = findViewById(R.id.button_update_patient);
 
-       // Intent intent = getIntent();
-
-//        //ReadWritePatientDetails readWritePatientDetails = new ReadWritePatientDetails();
-//        DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Patients");
-//        String patientId = PatientFormInput.getForm().patientId;
-//        referenceProfile.child(patientId).get().addOnCompleteListener(task -> {
-//            progressBar.setVisibility(View.GONE);
-//            showProfile(firebaseUser);
-////            if(task.isSuccessful()){
-////                if (task.getResult() != null){
-////                    ReadWritePatientDetails readWritePatientDetails = task.getResult().getValue(ReadWritePatientDetails.class);
-////
-////                }
-////            }
-//        });
-//        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                updateProfile(firebaseUser);
-//            }
-//        });
 
     }
 
@@ -277,15 +256,11 @@ public class Update_Profile_Patient extends AppCompatActivity {
                     if(task.isSuccessful()){
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().
                                 setDisplayName(textFullName).build();
-//                        Uri downloaduri = uri;
-//                        firebaseUser = authProfile.getCurrentUser();
-//                        UserProfileChangeRequest profileUpdatesImage = new UserProfileChangeRequest.Builder()
-//                                .setPhotoUri(downloaduri).build();
-//                        finalFirebaseUser.updateProfile(profileUpdatesImage);
 
-                        Toast.makeText(Update_Profile_Patient.this, "Update Successful!", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(Update_Profile_Patient.this, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
                         //Quay lại hồ sơ cập nhật sau khi cập nhật thành công
-                        // Stop user from returning to UpdateProfileActivity on pressing back button and close Activity
+
                         Intent intent = new Intent(Update_Profile_Patient.this,BackgroundDoctor.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -343,7 +318,7 @@ public class Update_Profile_Patient extends AppCompatActivity {
                                 referenceProfile.child(writerPatientDetails.patientId).setValue(writerPatientDetails).addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
                                         PatientFormInput.createFrom(writerPatientDetails);
-                                        Toast.makeText(Update_Profile_Patient.this, "User registered successfully, Please vertify your email", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Update_Profile_Patient.this, "Người dùng đã đăng ký thành công, Vui lòng xác minh email của bạn", Toast.LENGTH_LONG).show();
                                         // truyền dữ liệu qua lại giữa các activity
                                         Intent intent = new Intent(Update_Profile_Patient.this, ProfilePatient.class);
                                         intent.putExtra(PATIENT_ID, writerPatientDetails.patientId);
@@ -358,17 +333,16 @@ public class Update_Profile_Patient extends AppCompatActivity {
                                         intent.putExtra(ProfilePatient.NGAYSINH,writerPatientDetails.ngaysinh);
                                         intent.putExtra(ProfilePatient.CREATE_TIME,writerPatientDetails.getCreateTimeString());
                                         intent.putExtra(ProfilePatient.EMOTION,(Serializable)writerPatientDetails.getEmotions());
-                                        //intent.putExtra(ProfilePatient.)
-                                        //put profile patient to intent
+
                                         // Ngan nguoi dung dang ki thanh cong khong quay lai dang ki lai lan nua , nguoi dung dang ki thanh cong se chuyen den trang ho so
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                                         startActivity(intent);
-                                        finish(); // dong hoat dong Register
+                                        finish();
                                     } else {
-                                        Toast.makeText(Update_Profile_Patient.this, "User registered failed, Please try again", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Update_Profile_Patient.this, "Người dùng đăng ký không thành công, Vui lòng thử lại", Toast.LENGTH_LONG).show();
                                     }
-                                    // ẩn progressBar khi người dùng đăng kí thành công hoặc thất bại
+
                                     progressBar.setVisibility(View.GONE);
 
                                 });
@@ -448,7 +422,7 @@ public class Update_Profile_Patient extends AppCompatActivity {
                     editTextRegiterCMND.setText(textCMND);
                     editRegisterAddress.setText(textAddress);
 
-                    if(textGender.equals("Male")){ // Kiem tra neu gender = nam
+                    if(textGender.equals("Name")){ // Kiem tra neu gender = nam
                         radioButtonRegisterGenderSelected = findViewById(R.id.radio_patient_male);
                     } else {
                         radioButtonRegisterGenderSelected = findViewById(R.id.radio_patient_female);
@@ -457,14 +431,14 @@ public class Update_Profile_Patient extends AppCompatActivity {
 
 
                 } else{
-                    Toast.makeText(Update_Profile_Patient.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Update_Profile_Patient.this, "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Update_Profile_Patient.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Update_Profile_Patient.this, "Đã xảy ra lỗi!", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         });
@@ -620,9 +594,8 @@ public class Update_Profile_Patient extends AppCompatActivity {
         } else if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
             final boolean existsData = data != null && data.getData() != null;
             Uri uri = existsData ? data.getData() : mPhotoUri;
-            // truyền vào hàm đẩy lên ảnh
             uriImage = uri;
-            try {// covert uri sang bitmap sau đó đổ bitmap lên ảnh
+            try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                 xuLyAnh(bitmap);
                 //decode dung lượng ảnh hoặc kích thước ảnh bé theo kích thước của mình

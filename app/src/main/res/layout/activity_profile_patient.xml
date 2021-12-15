@@ -363,6 +363,7 @@
                         android:layout_marginTop="5dp"
                         android:hint="Loading"
                         android:textSize="18sp" />
+
                     <View
                         android:id="@+id/divider_status"
                         android:layout_width="match_parent"
@@ -400,6 +401,7 @@
                         android:layout_marginTop="5dp"
                         android:hint="Loading"
                         android:textSize="18sp" />
+
                     <View
                         android:id="@+id/divider_time"
                         android:layout_width="match_parent"
@@ -437,20 +439,21 @@
                         android:layout_marginTop="5dp"
                         android:hint="Loading"
                         android:textSize="18sp" />
-                    <View
-                        android:id="@+id/divider_emtions"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@+id/textview_show_emtions"
-                        android:layout_marginTop="5dp"
-                        android:background="@android:color/darker_gray" />
+
                     <RelativeLayout
-                        android:visibility="gone"
                         android:id="@+id/relativeLayout_tinhtrang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/textview_show_emtions"
                         android:orientation="vertical"
-                        android:layout_below="@+id/divider_emtions">
+                        android:visibility="gone">
+                        <View
+                            android:id="@+id/divider_emtions"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@android:color/darker_gray" />
+
                         <ImageView
                             android:id="@+id/ic_tinh_trang_benh"
                             android:layout_width="35dp"
@@ -479,31 +482,44 @@
                             android:hint="Loading"
                             android:textSize="18sp" />
                     </RelativeLayout>
+
                     <LinearLayout
-                        android:visibility="gone"
                         android:id="@+id/doctor_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/relativeLayout_tinhtrang"
+                        android:gravity="center"
                         android:orientation="vertical"
-                        android:gravity="center">
+                        android:visibility="gone">
+
                         <EditText
                             android:id="@+id/editText_chinh_sua"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
                             android:layout_marginTop="20dp"
-                            android:background="@drawable/border1"/>
+                            android:background="@drawable/border1" />
 
                         <Button
                             android:id="@+id/save_btn"
-                            android:layout_width="500px"
-                            android:layout_height="150px"
+                            android:layout_width="200dp"
+                            android:layout_height="60dp"
                             android:layout_below="@+id/editText_chinh_sua"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="20dp"
                             android:background="@drawable/background_patientp2"
                             android:text="Lưu lại" />
+
                     </LinearLayout>
+                    <Button
+                        android:id="@+id/button_back"
+                        android:layout_width="200dp"
+                        android:layout_height="60dp"
+                        android:layout_below="@id/doctor_view"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/background_patientp4"
+                        android:gravity="center"
+                        android:text="Back" />
                 </RelativeLayout>
             </RelativeLayout>
         </RelativeLayout>

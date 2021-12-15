@@ -223,7 +223,6 @@ public class AddActivity extends AppCompatActivity {
                     }
                 }, year, month, day); // 3 tham số xác định
                 picker.show();
-
             }
         });
     }
@@ -275,7 +274,7 @@ public class AddActivity extends AppCompatActivity {
                                 referenceProfile.child(writerPatientDetails.patientId).setValue(writerPatientDetails).addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
                                         PatientFormInput.createFrom(writerPatientDetails);
-                                        Toast.makeText(AddActivity.this, "User registered successfully, Please vertify your email", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AddActivity.this, "Người dùng đã đăng ký thành công, Vui lòng xác minh email của bạn", Toast.LENGTH_LONG).show();
                                         // truyền dữ liệu qua lại giữa các activity
                                         Intent intent = new Intent(AddActivity.this, ProfilePatient.class);
                                         intent.putExtra(ProfilePatient.PATIENT_ID, writerPatientDetails.patientId);
@@ -296,12 +295,12 @@ public class AddActivity extends AppCompatActivity {
                                         //intent.putExtra(ProfilePatient.)
                                         //put profile patient to intent
                                         // Ngan nguoi dung dang ki thanh cong khong quay lai dang ki lai lan nua , nguoi dung dang ki thanh cong se chuyen den trang ho so
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-
+//                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY| Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish(); // dong hoat dong Register
                                     } else {
-                                        Toast.makeText(AddActivity.this, "User registered failed, Please try again", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AddActivity.this, "Người dùng đăng ký không thành công, Vui lòng thử lại", Toast.LENGTH_LONG).show();
                                     }
                                     // ẩn progressBar khi người dùng đăng kí thành công hoặc thất bại
                                     progressBar.setVisibility(View.GONE);
@@ -333,20 +332,7 @@ public class AddActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cr.getType(mUri));
     }
 
-    //    private  void insertData(){
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("fullname",editTextAddFullName.getText().toString());
-//        map.put("cmnd",editTextAddCMND.getText().toString());
-//        map.put("fullname",editTextAddFullName.getText().toString());
-//        map.put("fullname",editTextAddFullName.getText().toString());
-//        map.put("fullname",editTextAddFullName.getText().toString());
-//        map.put("fullname",editTextAddFullName.getText().toString());
-//        map.put("fullname",editTextAddFullName.getText().toString());
-//        map.put("fullname",editTextAddFullName.getText().toString());
-//        map.put("fullname",editTextAddFullName.getText().toString());
-//
-//
-//    }
+
     private String Status() {
         String status = "";
         if (checkBoxHo.isChecked()) {
@@ -473,15 +459,15 @@ public class AddActivity extends AppCompatActivity {
             // Releases model resources if no longer used.
             model.close();
 
-            this.emotions = new HashMap<>();
+            emotions = new HashMap<>();
 
+            StringBuilder outstr = new StringBuilder();
 
             for (Category item : probability) {
-                emotions.put(item.getLabel(), String.valueOf(item.getScore() * 100) + "%\n");
-
+                outstr.append(item.getLabel()).append(": ").append(item.getScore() * 100).append("%\n");
+                emotions.put(item.getLabel(), item.getScore() * 100 + "%");
             }
-            lable_out.setText(emotions.toString());
-
+            lable_out.setText(outstr.toString());
 
         } catch (IOException e) {
             // TODO Handle the exception

@@ -23,19 +23,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="You can update your email address now . Please enter your password and verify before continuing"
+            android:text="Bạn có thể cập nhật địa chỉ email của bạn ngay bây giờ"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
         <TextView
+            android:id="@+id/textView_update_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_update_email"
-            android:text="Current Email"
-            android:layout_marginTop="50dp"
             android:layout_below="@+id/textView_update_email_head"
+            android:layout_marginTop="50dp"
             android:padding="6dp"
+            android:text="Email hiện tại"
             android:textColor="#555555"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,36 +46,41 @@
             android:padding="6dp"
             android:textColor="#555555"
             android:textSize="16sp"/>
+
         <TextView
+            android:id="@+id/textView_update_email_verify_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_update_email_verify_password"
             android:layout_below="@+id/textView_update_email_old"
+            android:layout_marginTop="20dp"
             android:padding="6dp"
             android:text="Password*"
-            android:layout_marginTop="20dp"
             android:textColor="#555555"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
+
         <EditText
+            android:id="@+id/editText_update_email_verify_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_update_email_verify_password"
             android:layout_below="@+id/textView_update_email_verify_password"
-            android:hint="Enter your password"
             android:background="@drawable/border1"
+            android:hint="Xác thực mật khẩu"
             android:inputType="textPassword"
             android:padding="6dp"
             android:textSize="16sp" />
+
         <Button
+            android:id="@+id/button_authenticate_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_authenticate_user"
             android:layout_below="@+id/editText_update_email_verify_password"
-            android:text="Authentication"
-            android:background="@drawable/background_patientp2"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"/>
+            android:background="@drawable/background_patientp1"
+            android:text="Xác thực"
+            android:textColor="@color/white"/>
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"
@@ -93,45 +99,51 @@
         android:background="@color/white"
         android:padding="15dp"
         android:layout_margin="15dp">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/textView_update_email_authenticated"
-            android:padding="6dp"
-            android:text="Your profile is not authenticated/Verified yet!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="Nhập Email mới"
             android:textColor="#555555"
-            android:textSize="16sp"/>
+            android:textSize="20sp" />
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/textView_update_email_new"
-            android:padding="6dp"
-            android:layout_below="@+id/textView_update_email_authenticated"
-            android:text="New Email*"
-            android:layout_marginTop="30dp"
-            android:textColor="#555555"
-            android:textSize="16sp"/>
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_update_email_authenticated"
+            android:layout_marginTop="30dp"
+            android:padding="6dp"
+            android:text=" Email mới *"
+            android:textColor="#555555"
+            android:textSize="16sp" />
+
+        <EditText
             android:id="@+id/editText_update_email_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/textView_update_email_new"
-            android:hint="Enter your new email"
             android:background="@drawable/border1"
+            android:hint="Nhập email mới"
             android:inputType="textEmailAddress"
             android:padding="6dp"
             android:textSize="16sp" />
+
         <Button
+            android:id="@+id/button_update_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_update_email"
             android:layout_below="@+id/editText_update_email_new"
-            android:text="Update Email"
-            android:background="@drawable/background_patientp2"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"/>
+            android:textColor="@color/white"
+            android:background="@drawable/background_patientp3"
+            android:text="Cập nhật email" />
 
         </RelativeLayout>
     </LinearLayout>

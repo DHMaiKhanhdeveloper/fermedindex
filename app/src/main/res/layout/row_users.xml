@@ -57,26 +57,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Button
-                    android:id="@+id/btn_edit"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="150dp"
+
+                <ImageView
+                    android:id="@+id/edit"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:textAllCaps="false"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="12dp"
-                    android:background="@drawable/background_patientp2"/>
-                <Button
-                    android:id="@+id/btn_delete"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="150dp"
+                    android:src="@drawable/pencil"
+                    android:layout_marginLeft="50dp"/>
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delete"
-                    android:textAllCaps="false"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/background_patientp2"/>
+                    android:src="@drawable/recycle_bin"
+                    android:layout_marginLeft="120dp"/>
 
             </LinearLayout>
 

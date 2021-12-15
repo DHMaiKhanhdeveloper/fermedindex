@@ -57,7 +57,7 @@
             android:layout_below="@+id/editText_register_patient_full_name"
             android:layout_marginTop="10dp"
             android:padding="6dp"
-            android:text="@string/date_off_birth_dd_mm_yyyy"
+            android:text="Ngày tháng năm sinh"
             android:textColor="#555555"
             android:textSize="16sp" />
 
@@ -69,7 +69,7 @@
             android:background="@drawable/border1"
             android:drawableStart="@drawable/ic_baseline_calendar_today_24"
             android:focusable="false"
-            android:hint="@string/select_your_date_of_birth_dd_mm_yyyy"
+            android:hint="Nhập ngày tháng năm sinh"
             android:inputType="date"
             android:padding="6dp"
             android:textSize="16sp"
@@ -129,7 +129,7 @@
             android:layout_below="@+id/textview_register_mobile"
             android:background="@drawable/border1"
             android:drawableStart="@drawable/ic_baseline_phone_android_24"
-            android:hint="@string/enter_your_mobile"
+            android:hint="Nhập số điện thoại"
             android:inputType="phone"
             android:padding="6dp"
             android:textSize="16sp"
@@ -310,7 +310,7 @@
             android:layout_marginLeft="70dp"
             android:layout_marginTop="12dp"
             android:layout_marginRight="70dp"
-            android:background="@drawable/background_patientp2"
+            android:background="@drawable/background_patientp3"
             android:text="@string/register"
             android:textStyle="bold" />
 

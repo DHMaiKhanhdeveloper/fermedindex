@@ -33,72 +33,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-//public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
-//
-//    Context context;
-//    List<ReadWritePatientDetails> usersList;
-//
-//    public AdapterUsers(Context context, List<ReadWritePatientDetails> usersList) {
-//        this.context = context;
-//        this.usersList = usersList;
-//    }
-//
-//    @NonNull
-//    @Override
-//    public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//
-//        View view = LayoutInflater.from(context).inflate(R.layout.row_users,parent,false);
-//
-//        return new MyHolder(view);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-//
-//       // String userImage = usersList.get(position).getImage();
-//        String userName = usersList.get(position).getFullname();
-//        String userEmail = usersList.get(position).getEmail();
-//
-//        // set data
-//        holder.mNameTv.setText(userName);
-//        holder.mEmailTv.setText(userEmail);
-//        try {
-////            Uri uri = firebaseUser.getPhotoUrl();
-////            Picasso.with(ListPatientFragment.this).load(uri).into(userImage);
-////            Picasso.get().load(userImage)
-////                    .placeholder(R.mipmap.ic_launcher_round1)
-////                    .into(holder.mAvatarIv);
-//        }catch (Exception e){
-//
-//        }
-//        //handle item click
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context,""+userEmail,Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return usersList.size();
-//    }
-//
-//    class MyHolder extends RecyclerView.ViewHolder{
-//
-//        ImageView mAvatarIv;
-//        TextView mNameTv , mEmailTv;
-//
-//
-//        public MyHolder(@NonNull View itemView) {
-//            super(itemView);
-//            mAvatarIv = itemView.findViewById(R.id.avatarIv);
-//            mNameTv = itemView.findViewById(R.id.nameTv);
-//            mEmailTv = itemView.findViewById(R.id.emailTv);
-//        }
-//    }
-//}
+
 public class AdapterUsers extends FirebaseRecyclerAdapter<ReadWritePatientDetails, AdapterUsers.myviewholder> {
     private final Fragment fragment;
 
@@ -148,7 +83,7 @@ public class AdapterUsers extends FirebaseRecyclerAdapter<ReadWritePatientDetail
 
 
         });
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+        holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img1.getContext())
@@ -211,7 +146,7 @@ public class AdapterUsers extends FirebaseRecyclerAdapter<ReadWritePatientDetail
                 });
             }
         });
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Tạo hộp thoại cảnh báo
@@ -245,10 +180,11 @@ public class AdapterUsers extends FirebaseRecyclerAdapter<ReadWritePatientDetail
 
 
     public class myviewholder extends RecyclerView.ViewHolder {
-        CardView cardView;
-        ImageView img1;
-        TextView textfullname, textAddress, textmobile;
-        private Button btnEdit , btnDelete;
+        private CardView cardView;
+        private ImageView img1;
+        private TextView textfullname, textAddress, textmobile;
+
+        private ImageView imageViewEdit, imageViewDelete;
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -259,10 +195,8 @@ public class AdapterUsers extends FirebaseRecyclerAdapter<ReadWritePatientDetail
             textmobile = itemView.findViewById(R.id.mobileTv);
             cardView = itemView.findViewById(R.id.cardView_patient);
 
-            btnEdit = itemView.findViewById(R.id.btn_edit);
-            btnDelete = itemView.findViewById(R.id.btn_delete);
-
-
+            imageViewEdit = itemView.findViewById(R.id.edit);
+            imageViewDelete = itemView.findViewById(R.id.delete);
         }
     }
 }

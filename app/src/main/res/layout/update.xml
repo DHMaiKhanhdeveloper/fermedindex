@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Update Details"
+        android:text="Cập nhật bệnh nhân"
         android:background="@color/teal_200"
         android:textSize="30dp"
         android:gravity="center"
@@ -59,7 +59,7 @@
             android:layout_below="@+id/editText_register_patient_full_name"
             android:layout_marginTop="10dp"
             android:padding="6dp"
-            android:text="@string/date_off_birth_dd_mm_yyyy"
+            android:text="Ngày tháng năm sinh"
             android:textColor="#555555"
             android:textSize="16sp"
             android:layout_marginLeft="15dp"
@@ -73,7 +73,7 @@
             android:background="@drawable/border1"
             android:drawableStart="@drawable/ic_baseline_calendar_today_24"
             android:focusable="false"
-            android:hint="@string/select_your_date_of_birth_dd_mm_yyyy"
+            android:hint="Nhập ngày tháng năm sinh"
             android:inputType="date"
             android:padding="6dp"
             android:textSize="16sp"
@@ -255,8 +255,8 @@
         android:layout_marginLeft="70dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="70dp"
-        android:background="@drawable/background_patientp2"
-        android:text="@string/register"
+        android:background="@drawable/background_patientp3"
+        android:text="Cập nhật"
         android:textStyle="bold" />
     </LinearLayout>
 

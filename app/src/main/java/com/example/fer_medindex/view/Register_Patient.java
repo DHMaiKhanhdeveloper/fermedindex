@@ -120,21 +120,7 @@ public class Register_Patient extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_patient);
 
-//        Button camera_bt = findViewById(R.id.button_camera);
-//        lable_out = findViewById(R.id.lable_out);
-//        img = findViewById(R.id.image_camera);
-//
-//        camera_bt.setOnClickListener(v -> {
-//            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-//            {
-//                requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-//            }
-//            else
-//            {
-//                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-//            }
-//        });
+
         init();
 
         imageProfile.setOnClickListener(new View.OnClickListener() {
@@ -294,7 +280,6 @@ public class Register_Patient extends AppCompatActivity {
         return status;
     }
     private void uploadToFirebase(Uri uri) {
-
         final StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -328,17 +313,16 @@ public class Register_Patient extends AppCompatActivity {
                                         intent.putExtra(ProfilePatient.NGAYSINH,writerPatientDetails.ngaysinh);
                                         intent.putExtra(ProfilePatient.CREATE_TIME,writerPatientDetails.getCreateTimeString());
                                         intent.putExtra(ProfilePatient.EMOTION,(Serializable)writerPatientDetails.getEmotions());
-                                        //intent.putExtra(ProfilePatient.)
-                                        //put profile patient to intent
-                                        // Ngan nguoi dung dang ki thanh cong khong quay lai dang ki lai lan nua , nguoi dung dang ki thanh cong se chuyen den trang ho so
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
+                                        // Ngan nguoi dung dang ki thanh cong khong quay lai dang ki lai lan nua , nguoi dung dang ki thanh cong se chuyen den trang ho so
+                                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY| Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
-                                        finish(); // dong hoat dong Register
+                                        finish();
                                     } else {
                                         Toast.makeText(Register_Patient.this, "User registered failed, Please try again", Toast.LENGTH_LONG).show();
                                     }
-                                    // ẩn progressBar khi người dùng đăng kí thành công hoặc thất bại
+
                                     progressBar.setVisibility(View.GONE);
 
                                 });
@@ -362,6 +346,7 @@ public class Register_Patient extends AppCompatActivity {
         });
     }
     private String getFileExtension(Uri mUri) {
+        //Giúp cho một ứng dụng quản lý quyền truy cập đến dữ liệu được lưu bởi ứng dụng đó
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(mUri));
@@ -461,8 +446,6 @@ public class Register_Patient extends AppCompatActivity {
 
             try {
                 Model model = Model.newInstance(Register_Patient.this);
-
-                // Creates inputs for reference.
                 TensorImage image = TensorImage.fromBitmap(bitmap);
 
                 // Runs model inference and gets result.
@@ -471,6 +454,12 @@ public class Register_Patient extends AppCompatActivity {
 
                 // Releases model resources if no longer used.
                 model.close();
+
+                emotions = new HashMap<>();
+
+                for (Category item : probability) {
+                    emotions.put(item.getLabel(), String.valueOf(item.getScore()*100));
+                }
 
                 StringBuilder outstr = new StringBuilder();
 
@@ -483,7 +472,7 @@ public class Register_Patient extends AppCompatActivity {
             }
         }
     private Uri mPhotoUri;
-    // dựa hàm onActivityResult để trả về cho mình
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -492,7 +481,7 @@ public class Register_Patient extends AppCompatActivity {
         Bitmap tmpImg = null;
         File cache = null;
         if (requestCode == REQUEST_PHOTO_GALLERY && resultCode == RESULT_OK) {
-            try {// đọc được đường dẫn của ảnh đấy
+            try {
                 InputStream in = getContentResolver().openInputStream(data.getData());
                 cache = Extensions.cache(this, in);
                 path = cache.getAbsolutePath();
@@ -512,9 +501,9 @@ public class Register_Patient extends AppCompatActivity {
         } else if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode == RESULT_OK) {
             final boolean existsData = data != null && data.getData() != null;
             Uri uri = existsData ? data.getData() : mPhotoUri;
-            // truyền vào hàm đẩy lên ảnh
+
             uriImage = uri;
-            try {// covert uri sang bitmap sau đó đổ bitmap lên ảnh
+            try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                 xuLyAnh(bitmap);
                 //decode dung lượng ảnh hoặc kích thước ảnh bé theo kích thước của mình
@@ -569,8 +558,5 @@ public class Register_Patient extends AppCompatActivity {
 
         if (cache != null) ((File) cache).delete();
     }
-
-
-
 
 }

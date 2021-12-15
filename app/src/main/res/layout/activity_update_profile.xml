@@ -12,55 +12,60 @@
         android:padding="15dp"
         android:layout_margin="15dp"
         android:background="@color/white">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/textView_update_profile_head"
-            android:layout_marginTop="30dp"
-            android:text="You can update your profile details now!"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Bạn có thể cập nhật chi tiết hồ sơ của bạn ngay bây giờ!"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <TextView
             android:id="@+id/textView_update_profile_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/textView_update_profile_head"
             android:layout_marginTop="30dp"
-            android:text="Name"
             android:padding="6dp"
-            android:textSize="16sp"
-            android:textColor="#555555" />
+            android:text="Họ và Tên"
+            android:textColor="#555555"
+            android:textSize="16sp" />
+
         <EditText
+            android:id="@+id/editText_update_profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_update_profile_name"
             android:layout_below="@+id/textView_update_profile_name"
             android:background="@drawable/border1"
+            android:hint="Nhập họ và tên"
             android:inputType="textPersonName"
             android:padding="6dp"
-            android:textSize="16sp"
-            android:hint="Enter full name"/>
+            android:textSize="16sp" />
+
         <TextView
+            android:id="@+id/textView_update_profile_dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_update_profile_dob"
             android:layout_below="@+id/editText_update_profile_name"
             android:layout_marginTop="10dp"
-            android:text="Date of Birth(dd/mm/yyyy)"
             android:padding="6dp"
-            android:textSize="16sp"
-            android:textColor="#555555" />
+            android:text="Ngày tháng năm sinh"
+            android:textColor="#555555"
+            android:textSize="16sp" />
+
         <EditText
+            android:id="@+id/editText_update_profile_dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText_update_profile_dob"
             android:layout_below="@+id/textView_update_profile_dob"
             android:background="@drawable/border1"
             android:focusable="false"
+            android:hint="Chọn ngày tháng năm sinh"
             android:inputType="date"
             android:padding="6dp"
-            android:textSize="16sp"
-            android:hint="Select your date of birth"/>
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView_update_profile_gender"
@@ -69,7 +74,7 @@
             android:layout_below="@+id/editText_update_profile_dob"
             android:layout_marginTop="10dp"
             android:padding="6dp"
-            android:text="Gender"
+            android:text="Giới tính"
             android:textColor="#555555"
             android:textSize="16sp" />
         <RadioGroup
@@ -82,16 +87,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio_update_female"
-            android:text="Female"
+            android:text="Nữ"
             android:textSize="16sp"
-            android:textColor="#666666"/>
+            android:textColor="#666666"
+            android:layout_marginLeft="40dp"
+            />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radio_update_male"
-            android:text="Male"
+            android:text="Nam"
             android:textSize="16sp"
-            android:textColor="#666666"/>
+            android:textColor="#666666"
+            android:layout_marginLeft="40dp"/>
         </RadioGroup>
 
         <TextView
@@ -101,7 +109,7 @@
             android:layout_below="@+id/radio_group_update_gender"
             android:layout_marginTop="10dp"
             android:padding="6dp"
-            android:text="Mobile"
+            android:text="Số điện thoại"
             android:textColor="#555555"
             android:textSize="16sp" />
 
@@ -111,32 +119,24 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_update_profile_mobile"
             android:background="@drawable/border1"
-            android:hint="Enter your mobile no. (without +84)"
+            android:hint="Nhập số điện thoại "
             android:inputType="phone"
             android:padding="6dp"
             android:textSize="16sp" />
+
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_upload_profile_pic"
-            android:background="@drawable/background_patientp2"
-            android:layout_below="@+id/editText_update_profile_mobile"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"
-            android:text="upload profile pic"
-            android:textColor="@color/white"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/button_update_profile"
-            android:background="@drawable/background_patientp2"
-            android:layout_below="@+id/button_upload_profile_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_update_profile_mobile"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"
-            android:text="update profile"
-            android:textColor="@color/white"/>
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/background_patientp1"
+            android:text="Cập nhật "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.example.fer_medindex.R;
 import com.example.fer_medindex.view.Background;
@@ -23,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class OptionFragment extends Fragment {
 
-    private Button buttondoiAvatar , buttondoithongtin, buttondoimatkhau, buttonthoat;
+    private RelativeLayout relativeLayoutdoiAvatar , relativeLayoutdoithongtin, relativeLayoutdoimatkhau, relativeLayoutthoat;
 
 
     @Override
@@ -32,35 +33,35 @@ public class OptionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_option, container, false);
 
-        buttondoiAvatar = view.findViewById(R.id.doi_avatar);
-        buttondoimatkhau = view.findViewById(R.id.doi_mat_khau);
-        buttondoithongtin = view.findViewById(R.id.sua_thong_tin);
-        buttonthoat=view.findViewById(R.id.dang_xuat);
+        relativeLayoutdoiAvatar = view.findViewById(R.id.doi_avatar);
+        relativeLayoutdoimatkhau = view.findViewById(R.id.doi_mat_khau);
+        relativeLayoutdoithongtin = view.findViewById(R.id.sua_thong_tin);
+        relativeLayoutthoat=view.findViewById(R.id.dang_xuat);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        buttondoiAvatar.setOnClickListener(v -> {
+        relativeLayoutdoiAvatar.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), UploadProfile.class);
             startActivity(intent);
         });
 
-        buttondoithongtin.setOnClickListener(v -> {
+        relativeLayoutdoithongtin.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), UpdateProfile.class);
             startActivity(intent);
         });
 
-        buttondoimatkhau.setOnClickListener(v -> {
+        relativeLayoutdoimatkhau.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), ChangePassword.class);
             startActivity(intent);
         });
 
-        buttonthoat.setOnClickListener(v -> {
+        relativeLayoutthoat.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
             builder.setTitle("Exit App");
-            builder.setMessage("Thoát");
+            builder.setMessage("Bạn chắc chắn muốn thoát");
             builder.setPositiveButton("YES", (dialog, which) -> {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(requireContext(), Background.class);

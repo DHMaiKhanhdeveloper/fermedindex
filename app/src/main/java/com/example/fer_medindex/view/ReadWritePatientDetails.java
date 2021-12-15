@@ -11,6 +11,7 @@ public class ReadWritePatientDetails implements Serializable {
     public String fullname, patientId, ngaysinh, gioitinh, sodienthoai, cmnd, diachi, trangthai, email,tinhtrangbenh;
     public Date createTime;
     public String imgHinh;
+    private Map<String,String> emotions;
     public Map<String, String> getEmotions() {
         return emotions;
     }
@@ -19,7 +20,7 @@ public class ReadWritePatientDetails implements Serializable {
         this.emotions = emotions;
     }
 
-    private Map<String,String> emotions;
+
 
     public ReadWritePatientDetails() {
 
@@ -48,7 +49,23 @@ public class ReadWritePatientDetails implements Serializable {
         this.email = textemail;
         this.createTime = new Date();
     }
-    public ReadWritePatientDetails(String textfullname, String textngaysinh, String textgioitinh, String textsodienthoai, String textcmnd, String textemail, String textdiachi, String texttrangthai, String imgHinh,String tinhtrangbenh) {
+    public ReadWritePatientDetails(String textfullname, String textngaysinh, String textgioitinh, String textsodienthoai, String textcmnd, String textemail, String textdiachi, String texttrangthai, String imgHinh,String tinhTrangbenh) {
+        this.patientId = UUID.randomUUID().toString();
+        this.fullname = textfullname;
+        this.imgHinh = imgHinh;
+        this.ngaysinh = textngaysinh;
+        this.gioitinh = textgioitinh;
+        this.sodienthoai = textsodienthoai;
+        this.cmnd = textcmnd;
+        this.diachi = textdiachi;
+        this.trangthai = texttrangthai;
+        this.email = textemail;
+        this.createTime = new Date();
+        this.tinhtrangbenh = tinhTrangbenh;
+    }
+    public ReadWritePatientDetails(String textfullname, String textngaysinh, String textgioitinh,
+                                   String textsodienthoai, String textcmnd, String textemail, String textdiachi,
+                                   String texttrangthai, String imgHinh,String tinhtrangbenh,Map<String,String> emotions) {
         this.patientId = UUID.randomUUID().toString();
         this.fullname = textfullname;
         this.imgHinh = imgHinh;
@@ -61,6 +78,7 @@ public class ReadWritePatientDetails implements Serializable {
         this.email = textemail;
         this.createTime = new Date();
         this.tinhtrangbenh = tinhtrangbenh;
+        this.emotions =emotions;
     }
     public ReadWritePatientDetails(String textfullname, String textemail) {
         this.fullname = textfullname;

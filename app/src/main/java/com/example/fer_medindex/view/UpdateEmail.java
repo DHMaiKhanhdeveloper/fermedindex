@@ -39,7 +39,7 @@ public class UpdateEmail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_email);
 
-        getSupportActionBar().setTitle("Update Email");
+        getSupportActionBar().setTitle("Cập nhật email");
 
         progressBar = findViewById(R.id.progressBar);
         editTextPwd = findViewById(R.id.editText_update_email_verify_password);
@@ -47,62 +47,46 @@ public class UpdateEmail extends AppCompatActivity {
         textViewAuthenticated = findViewById(R.id.textView_update_email_authenticated);
         buttonUpdateEmail = findViewById(R.id.button_update_email);
 
-        // tắt nút cập nhật email
         buttonUpdateEmail.setEnabled(false);
         editTextNewEmail.setEnabled(false);
         // xác thực firebase
         authProfile = FirebaseAuth.getInstance();
-        // lấy người dùng sử dụng biến hồ sơ xác thực
-        firebaseUser = authProfile.getCurrentUser();
 
-        // Sử dụng phương thức get email cùng người dùng firebase
+        firebaseUser = authProfile.getCurrentUser();
         userOldEmail = firebaseUser.getEmail();
-        //Liên kết chế độ xem văn bản
         TextView textViewOldEmail = findViewById(R.id.textView_update_email_old);
-        // đặt id email cũ or hiện tại lưu vào biến chuỗi
         textViewOldEmail.setText(userOldEmail);
 
-        if(firebaseUser.equals("")){ // Nếu người dùng là null
-            Toast.makeText(UpdateEmail.this,"Something went wrong! User's details not available",Toast.LENGTH_LONG).show();
-        } else{ // Nếu người dùng không null dùng phương thức xác thực
+        if(firebaseUser.equals("")){
+            Toast.makeText(UpdateEmail.this,"Đã xảy ra lỗi! Thông tin chi tiết của người dùng không có sẵn",Toast.LENGTH_LONG).show();
+        } else{
             reAuthenticate(firebaseUser);
         }
     }
     //Xác thực khi người  dùng thay đổi và cập nhật id email
- //ReAuthenticate / Verify User before updating email
     private void reAuthenticate(FirebaseUser firebaseUser) {
         Button buttonVerifyUser = findViewById(R.id.button_authenticate_user);
         buttonVerifyUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtain password for authentication
-                // lấy mật khẩu người dùng từ văn bản chỉnh sửa
                 userPwd = editTextPwd.getText().toString();
-                // sử dụng mật khẩu của chúng ta xác thực lại người dùng\
-                // kiểm tra xem người dùng đã nhập bất kỳ mật khẩu nào hay chưa nếu chưa thì chúng ta hiển thị lỗi
                 if(TextUtils.isEmpty(userPwd)){
-                    Toast.makeText(UpdateEmail.this,"Password is needed to continue",Toast.LENGTH_LONG).show();
-                    editTextPwd.setError("Please enter your password for authentication");
+                    Toast.makeText(UpdateEmail.this,"Mật khẩu là cần thiết để tiếp tục",Toast.LENGTH_LONG).show();
+                    editTextPwd.setError("Vui lòng nhập mật khẩu của bạn để xác thực");
                     editTextPwd.requestFocus();
                 } else {
                     progressBar.setVisibility(View.VISIBLE);
-                    // Xác thực người dùng qua id , mật khẩu . Xác thực thông tin bằng email auth nhà cung cấp chấp nhận chứng chỉ
-                    // Phương thức này nhận 2 tham số : 1 là email,  2 là mật khẩu
                     AuthCredential credential = EmailAuthProvider.getCredential(userOldEmail,userPwd);
-                    // chuyển thông tin đăng nhập vừa mới nhập vào oncompletelistener
+
                     firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                 //loại bỏ thanh tiến trình có nghĩa là người dùng đã xác thực
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(UpdateEmail.this,"Password has been verified."+
-                                    "You can update email now",Toast.LENGTH_LONG).show();
+                            Toast.makeText(UpdateEmail.this,"Mật khẩu đã được xác minh."+
+                                    "Bạn có thể cập nhật email ngay bây giờ",Toast.LENGTH_LONG).show();
+                            textViewAuthenticated.setText("Bạn đã được xác thực. Bạn có thể cập nhật email của mình ngay bây giờ.");
 
-                            // đặt chế độ xem văn bản để hiển thi rằng người dùng đã xác thực
-                            textViewAuthenticated.setText("You are authenticated. You can update your email now.");
-                            // bật button email và edit new email để xác thực email mới
-                            // tắt nút button authenticate và  edit password
                             editTextNewEmail.setEnabled(true);
                             buttonUpdateEmail.setEnabled(true);
                             buttonVerifyUser.setEnabled(false);
@@ -115,20 +99,19 @@ public class UpdateEmail extends AppCompatActivity {
                                 public void onClick(View v) {
                                     userNewEmail = editTextNewEmail.getText().toString();
                                     if(TextUtils.isEmpty(userNewEmail)){
-                                        Toast.makeText(UpdateEmail.this,"New Email is required",Toast.LENGTH_LONG).show();
-                                        editTextPwd.setError("Please enter your Email");
+                                        Toast.makeText(UpdateEmail.this,"Bắt buộc nhập email mới",Toast.LENGTH_LONG).show();
+                                        editTextPwd.setError("Nhập Email mới");
                                         editTextPwd.requestFocus();
                                     } else  if(!Patterns.EMAIL_ADDRESS.matcher(userNewEmail).matches()){
-                                        Toast.makeText(UpdateEmail.this,"Please enter valid Email",Toast.LENGTH_LONG).show();
-                                        editTextPwd.setError("Please provide valid Email");
+                                        Toast.makeText(UpdateEmail.this,"Vui lòng nhập email hợp lệ",Toast.LENGTH_LONG).show();
+                                        editTextPwd.setError("Vui lòng cung cấp Email hợp lệ");
                                         editTextPwd.requestFocus();
                                     }else  if( userOldEmail.matches(userNewEmail)){
-                                        Toast.makeText(UpdateEmail.this,"New Email cannot be same as old Email",Toast.LENGTH_LONG).show();
-                                        editTextPwd.setError("Please enter new Email");
+                                        Toast.makeText(UpdateEmail.this,"Email mới không được giống với Email cũ",Toast.LENGTH_LONG).show();
+                                        editTextPwd.setError("Nhập Email mới");
                                         editTextPwd.requestFocus();
                                     } else {
                                         progressBar.setVisibility(View.VISIBLE);
-                                        // gọi một email cập nhật trong phương thúc này
                                         updateEmail(firebaseUser);
                                     }
                                 }
@@ -150,16 +133,14 @@ public class UpdateEmail extends AppCompatActivity {
     }
 
     private void updateEmail(FirebaseUser firebaseUser) {
-        // dùng firebase để cập nhật phương thức email
         firebaseUser.updateEmail(userNewEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isComplete()){
                     // gửi liên kết xác thực email người dùng
                     firebaseUser.sendEmailVerification();
-                    // Email đã cập nhật thành công vui lòng xác thực lại email
-                    Toast.makeText(UpdateEmail.this,"Email has been updated . Please verify your new email",Toast.LENGTH_SHORT).show();
-                    // bắt đầu hoạt động hồ sơ người dùng và đóng hoạt động email cập nhật
+                    Toast.makeText(UpdateEmail.this,"Email đã được cập nhật. Vui lòng xác minh email mới của bạn",Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(UpdateEmail.this,LoginActivity.class);
                     startActivity(intent);
                     finish();

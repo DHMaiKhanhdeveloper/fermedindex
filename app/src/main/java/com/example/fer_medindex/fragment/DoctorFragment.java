@@ -74,6 +74,7 @@ public class DoctorFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     ReadWriteUserDetails result = ds.getValue(ReadWriteUserDetails.class);
+                    textViewWelcome.setText("Chào mừng " +result.getFullName());
                     textViewGmail.setText(result.getEmail());
                     textViewFullName.setText(result.getFullName());
                     textViewMobile.setText(result.getMobile());

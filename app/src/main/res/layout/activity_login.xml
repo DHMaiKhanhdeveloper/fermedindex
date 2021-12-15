@@ -68,7 +68,7 @@
                     android:layout_below="@+id/textView_login_email"
 
                     android:background="@drawable/border2"
-                    android:hint="Enter Email"
+                    android:hint="Nhập email"
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
                     android:textSize="16dp" />
@@ -80,7 +80,7 @@
                     android:layout_below="@+id/editText_login_doctor_email"
                     android:layout_marginTop="10dp"
                     android:padding="6dp"
-                    android:text="Password"
+                    android:text="Mật khẩu"
                     android:textColor="@color/themeColor"
                     android:textSize="16sp" />
 
@@ -92,7 +92,7 @@
                     android:layout_below="@+id/textView_login_password"
                     android:background="@drawable/border2"
                     android:drawableRight="@drawable/ic_baseline_visibility_off_24"
-                    android:hint="Enter Password"
+                    android:hint="Nhập mật khẩu"
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:textSize="16dp">
@@ -109,7 +109,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/forgot_password"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/newsMoreTextSize" />
+                    android:textSize="16sp" />
 
 
                 <Button

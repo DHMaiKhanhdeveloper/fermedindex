@@ -196,28 +196,28 @@ public class RegisterActivity extends AppCompatActivity {
                 editTextRegisterMobile.requestFocus();
                 v.setEnabled(true);
             } else if (!mobileMatcher.find()) {
-                Toast.makeText(RegisterActivity.this, "Please re-enter your mobile ", Toast.LENGTH_LONG).show();
-                editTextRegisterMobile.setError("Mobile is not valid");
+                Toast.makeText(RegisterActivity.this, "Vui lòng nhập lại số điện thoại của bạn ", Toast.LENGTH_LONG).show();
+                editTextRegisterMobile.setError("Điện thoại di động không hợp lệ");
                 editTextRegisterMobile.requestFocus();
                 v.setEnabled(true);
             } else if (TextUtils.isEmpty(textPassword)) {
-                Toast.makeText(RegisterActivity.this, "Please enter your password ", Toast.LENGTH_LONG).show();
-                editTextRegiterPass.setError("Password is required");
+                Toast.makeText(RegisterActivity.this, "Vui lòng nhập lại mật khẩu của bạn ", Toast.LENGTH_LONG).show();
+                editTextRegiterPass.setError("Bắt buộc phải nhập mật khẩu");
                 editTextRegiterPass.requestFocus();
                 v.setEnabled(true);
             } else if (textPassword.length() < 6) {
-                Toast.makeText(RegisterActivity.this, "Please should be at least 6 digits ", Toast.LENGTH_LONG).show();
-                editTextRegiterPass.setError("Password too weak");
+                Toast.makeText(RegisterActivity.this, "Mật khẩu phải có ít nhất 6 kí tự ", Toast.LENGTH_LONG).show();
+                editTextRegiterPass.setError("Mật khẩu quá yếu");
                 editTextRegiterPass.requestFocus();
                 v.setEnabled(true);
             } else if (TextUtils.isEmpty(textConfirmPass)) {
-                Toast.makeText(RegisterActivity.this, "Please enter your confirm password ", Toast.LENGTH_LONG).show();
-                editRegisterConfirmPass.setError("Password Confirmation is required");
+                Toast.makeText(RegisterActivity.this, "Vui lòng nhập lại mật khẩu ", Toast.LENGTH_LONG).show();
+                editRegisterConfirmPass.setError("Bắt buộc phải nhập mật khẩu xác nhận");
                 editRegisterConfirmPass.requestFocus();
                 v.setEnabled(true);
             } else if (!textPassword.equals(textConfirmPass)) {
-                Toast.makeText(RegisterActivity.this, "Please enter same password ", Toast.LENGTH_LONG).show();
-                editRegisterConfirmPass.setError("Password Confirmation is required");
+                Toast.makeText(RegisterActivity.this, "Vui lòng nhập cùng một mật khẩu ", Toast.LENGTH_LONG).show();
+                editRegisterConfirmPass.setError("Bắt buộc phải nhập mật khẩu xác nhận");
                 editTextRegiterPass.clearComposingText(); // xoa nhap lai
                 editRegisterConfirmPass.clearComposingText();
                 v.setEnabled(true);
@@ -235,16 +235,11 @@ public class RegisterActivity extends AppCompatActivity {
                 task -> {
                     buttonRegister.setEnabled(true);
                     if (task.isSuccessful()) {
-                        FirebaseUser firebaseUser = task.getResult().getUser(); // auth la bien xac thuc firebase
-
-                        //Cập nhật hiển thi tên người dùng
-//                            UserProfileChangeRequest profileChangeRequest= new UserProfileChangeRequest.Builder().setDisplayName(textFullName).build();
-//                            firebaseUser.updateProfile(profileChangeRequest);
+                        FirebaseUser firebaseUser = task.getResult().getUser();
 
                         //Nhap du lieu vao Firebase Realtime Database java object
                         ReadWriteUserDetails writerUserDetails = new ReadWriteUserDetails(textFullName, textEmail, textDoB, textGender, textMobile,imgHinh);
 
-                        //trích xuất tham chiếu người dùng từ cơ sở dữ liệu để "đăng ký người dùng"
                         DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered Users");
 
                         referenceProfile.child(firebaseUser.getUid()).setValue(writerUserDetails).addOnCompleteListener(task1 -> {
@@ -252,20 +247,19 @@ public class RegisterActivity extends AppCompatActivity {
                                 // Gui xac nhan Email
                                 firebaseUser.sendEmailVerification();
 
-                                Toast.makeText(RegisterActivity.this, "User registered successfully, Please vertify your email", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Người dùng đã đăng ký thành công, Vui lòng xác minh email của bạn", Toast.LENGTH_LONG).show();
 
-                                // Mo ho so nguoi dung khi dang ki thanh cong
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 // Ngan nguoi dung dang ki thanh cong khong quay lai dang ki lai lan nua , nguoi dung dang ki thanh cong se chuyen den trang ho so
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 auth.signOut();
                                 firebaseUser.reload();
                                 startActivity(intent);
-                                finish(); // dong hoat dong Register
+                                finish();
                             } else {
-                                Toast.makeText(RegisterActivity.this, "User registered failed, Please try again", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Người dùng đăng ký không thành công, Vui lòng thử lại", Toast.LENGTH_LONG).show();
                             }
-                            // ẩn progressBar khi người dùng đăng kí thành công hoặc thất bại
+
                             progressBar.setVisibility(View.GONE);
                         });
 
@@ -274,19 +268,19 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             throw task.getException(); // java exception
                         } catch (FirebaseAuthWeakPasswordException e) {
-                            editTextRegiterPass.setError("Your password is too weak. Kindly use a mix of alphabets, numbers");
+                            editTextRegiterPass.setError("Mật khẩu của bạn quá yếu. Vui lòng sử dụng kết hợp các bảng chữ cái hoặc số");
                             editRegisterConfirmPass.requestFocus();
-                        } catch (FirebaseAuthInvalidCredentialsException e) { // Trường hợp ngoại lệ thông tin đăng nhập không hợp lệ của Firebase Auth
-                            editTextRegiterPass.setError("Your email is invalid or already in use. Kindly re-enter");
+                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                            editTextRegiterPass.setError("Email của bạn không hợp lệ hoặc đã được sử dụng. Vui lòng nhập lại");
                             editTextRegiterPass.requestFocus();
                         } catch (FirebaseAuthUserCollisionException e) { // Ngoại lệ va chạm người dùng
-                            editTextRegiterPass.setError("User is already registered with this email. Use another email.");
+                            editTextRegiterPass.setError("Người dùng đã được đăng ký với email này. Sử dụng email khác.");
                             editTextRegiterPass.requestFocus();
                         } catch (Exception e) {
                             Log.e(TAG, e.getMessage());
                             Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                        // ẩn progressBar khi người dùng đăng kí thành công hoặc thất bại
+
                         progressBar.setVisibility(View.GONE);
                     }
                 });
@@ -325,7 +319,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.VISIBLE);
                                 registerUser(textFullName, textEmail, textDoB, textMobile, textGender, textPassword,uri.toString());
                             }
-                        }, 2500);
+                        }, 1000);
 
                     }
                 });
@@ -458,9 +452,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             try {
-                // ham convert uri
+
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                //
 
                 tmpImg = this.decodeSampledBitmapFromUri(data.getData(), bitmap.getWidth(), bitmap.getHeight(), getContentResolver());
                 uriImage = data.getData();

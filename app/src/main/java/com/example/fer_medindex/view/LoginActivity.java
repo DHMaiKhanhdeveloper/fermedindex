@@ -57,30 +57,12 @@ public class LoginActivity extends AppCompatActivity {
         textforgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "You can reset your password now!", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Bạn có thể đặt lại mật khẩu của mình ngay bây giờ!", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
             }
         });
 
-//        ImageView imageViewShowHidepassword = findViewById(R.id.imageView_show_hide_password);
-//        imageViewShowHidepassword.setImageResource(R.drawable.ic_hide_pwd);
-//        imageViewShowHidepassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //getInstance kiểm tra xem mật khẩu có hiện thị ngay từ đầu hay không
-//                if (editTextLoginPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
-//                    //Nếu mật khẩu hiển thị thì hãy ẩn mật khẩu
-//                    editTextLoginPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                    // thay đổi icon ẩn
-//                    imageViewShowHidepassword.setImageResource(R.drawable.ic_hide_pwd);
-//                } else {
-//                    //mật khẩu có hiện thị
-//                    editTextLoginPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-//                    // thay đổi icon hiện
-//                    imageViewShowHidepassword.setImageResource(R.drawable.ic_show_pwd);
-//                }
-//            }
-//        });
+
         editTextLoginPassword.setOnTouchListener((v, event) -> {
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -103,27 +85,23 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         });
         Button buttonLogin = findViewById(R.id.button_login);
-//        buttonLogin.setOnClickListener(v -> {
-//            Intent intent = new Intent(LoginActivity.this, UserProfile.class);
-//            startActivity(intent);
-//
-//        });
+
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String textEmail = editTextLoginEmail.getText().toString();
                 String textPassword = editTextLoginPassword.getText().toString();
                 if (TextUtils.isEmpty(textEmail)) {
-                    Toast.makeText(LoginActivity.this, "Please Enter Your Emai", Toast.LENGTH_SHORT).show();
-                    editTextLoginEmail.setError("Email is required");
+                    Toast.makeText(LoginActivity.this, "Vui lòng nhập email của bạn", Toast.LENGTH_SHORT).show();
+                    editTextLoginEmail.setError("Bắt buộc phải nhập email");
                     editTextLoginEmail.requestFocus();
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
-                    Toast.makeText(LoginActivity.this, "Please re_enter your email", Toast.LENGTH_LONG).show();
-                    editTextLoginEmail.setError("Valid Email is required");
+                    Toast.makeText(LoginActivity.this, "Vui lòng nhập lại email của bạn", Toast.LENGTH_LONG).show();
+                    editTextLoginEmail.setError("Bắt buộc phải nhập email");
                     editTextLoginEmail.requestFocus();
                 } else if (TextUtils.isEmpty(textPassword)) {
-                    Toast.makeText(LoginActivity.this, "Please Enter Your Password", Toast.LENGTH_SHORT).show();
-                    editTextLoginEmail.setError("Password is required");
+                    Toast.makeText(LoginActivity.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
+                    editTextLoginEmail.setError("Bắt buộc phải nhập mật khẩu");
                     editTextLoginEmail.requestFocus();
                 } else {
                     progressBar.setVisibility(View.VISIBLE);
@@ -138,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-//                    Toast.makeText(LoginActivity.this, "You are logged in now", Toast.LENGTH_SHORT).show();
+
                     //lấy phiên bản của người dùng hiện tại
                     FirebaseUser firebaseUser = task.getResult().getUser();
                     //Kiểm tra xem email có được xác minh hay không trước khi người dùng có thể truy cập hồ sơ của họ
@@ -147,14 +125,14 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     if (firebaseUser.isEmailVerified()) {
                         Toast.makeText(LoginActivity.this, "You are logged in now", Toast.LENGTH_SHORT).show();
-                        // Bắt đầu UserProfileActivity
+
                         startActivity(new Intent(LoginActivity.this, BackgroundDoctor.class));
                         PatientFormInput.clearForm();
-                        finish(); // đóng LoginActivity
+                        finish();
                         return;
                         // mở hồ sơ người dùng
                     }
-                    authProfile.signOut(); // đăng xuất
+                    authProfile.signOut();
                     firebaseUser.sendEmailVerification();
                     showAlertDialog();
                 } else {
@@ -182,11 +160,11 @@ public class LoginActivity extends AppCompatActivity {
         builder.setTitle("Email not Verified");
         builder.setMessage("Please verify your email now. You can not login without email verification. ");
 
-        //Mở ứng dụng email nếu người dùng nhấp / nhấn vào nút tiếp tục
+
         builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // xuất hiện trong trình khởi chạy màn hình chính
+
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_APP_EMAIL);
                 //Gửi ứng dụng email trong cửa sổ mới và không phải trong ứng dụng của chúng tôi
@@ -194,9 +172,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // Tạo AlertDialog
+
         AlertDialog alertDialog = builder.create();
-        // Hiển thị AlertDialog
         alertDialog.show();
 
     }
@@ -205,13 +182,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // người dùng không phải null có nghĩa là người dùng đã đăng nhập vào rồi
+
         if (authProfile.getCurrentUser() != null) {
             Toast.makeText(LoginActivity.this, "Already Logged In!", Toast.LENGTH_SHORT).show();
 
-            // Bắt đầu UserProfileActivity
+
             startActivity(new Intent(LoginActivity.this, BackgroundDoctor.class));
-            finish(); // đóng LoginActivity
+            finish();
         } else {
             Toast.makeText(LoginActivity.this, "You can login now!", Toast.LENGTH_SHORT).show();
         }
