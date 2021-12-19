@@ -281,11 +281,19 @@
             android:backgroundTint="@color/teal_200"
             android:src="@drawable/ic_baseline_camera_alt_24" />
 
+        <ImageView
+            android:id="@+id/imageView_profile_user"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/image_camera"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border1" />
+
         <TextView
             android:id="@+id/lable_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_camera"
+            android:layout_below="@+id/imageView_profile_user"
             android:layout_centerHorizontal="true"
             android:background="@color/light_gray"
             android:text="@string/cam_xuc"

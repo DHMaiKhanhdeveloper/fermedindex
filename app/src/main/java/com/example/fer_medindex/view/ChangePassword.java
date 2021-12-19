@@ -38,7 +38,7 @@ public class ChangePassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
-        getSupportActionBar().setTitle("Đổi mật khẩu");
+        //getSupportActionBar().setTitle("Đổi mật khẩu");
 
         editTextPwdNew = findViewById(R.id.editText_change_pwd_new);
         editTextPwdCurr = findViewById(R.id.editText_change_pwd_current);
@@ -95,8 +95,8 @@ public class ChangePassword extends AppCompatActivity {
                                 buttonReAuthenticate.setEnabled(false);
                                 buttonChangePwd.setEnabled(true);
 
-                                textViewAuthenticated.setText("Bạn đã xác thực"+"Bạn có thể thay đổi mật khẩu ngay bây giờ!");
-                                Toast.makeText(ChangePassword.this,"Password has been verified"+
+                                textViewAuthenticated.setText("Bạn đã xác thực mật khẩu "+"Bạn có thể cập nhật mật khẩu mới ngay bây giờ!");
+                                Toast.makeText(ChangePassword.this,"Mật khẩu đã được xác minh"+
                                         "Thay đổi mật khẩu ngay bây giờ",Toast.LENGTH_SHORT).show();
                                 //Update color of Change Password Button
                                 buttonChangePwd.setBackgroundTintList(ContextCompat.getColorStateList(ChangePassword.this, R.color.yellow));

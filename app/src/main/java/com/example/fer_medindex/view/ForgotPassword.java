@@ -32,7 +32,7 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-     getSupportActionBar().setTitle("Quên mật khẩu");
+     //getSupportActionBar().setTitle("Quên mật khẩu");
 
         editTextPwdResetEmail = findViewById(R.id.editText_password_reset_email);
         buttonPwdReset = findViewById(R.id.button_password_reset);

@@ -510,6 +510,7 @@
                             android:text="Lưu lại" />
 
                     </LinearLayout>
+
                     <Button
                         android:id="@+id/button_back"
                         android:layout_width="200dp"
@@ -519,7 +520,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/background_patientp4"
                         android:gravity="center"
-                        android:text="Back" />
+                        android:text="Thoát" />
                 </RelativeLayout>
             </RelativeLayout>
         </RelativeLayout>

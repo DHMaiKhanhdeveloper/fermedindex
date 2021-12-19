@@ -647,7 +647,6 @@ public class Update_Profile_Patient extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         if (cache != null) ((File) cache).delete();
     }
 

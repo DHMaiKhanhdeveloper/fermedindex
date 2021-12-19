@@ -31,25 +31,30 @@
             android:theme="@style/AppTheme.NoActionBar" /> <!-- tools:ignore="AllowBackup" -->
         <activity
             android:name=".view.AddActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.ListPatientActivity"
             android:exported="true" />
         <activity
             android:name=".view.ChangePassword"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.UpdateEmail"
             android:exported="true" />
         <activity
             android:name=".view.UpdateProfile"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.UploadProfile"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.ForgotPassword"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
 <!--        <activity-->
 <!--            android:name=".view.UserProfile"-->
 <!--            android:exported="true"-->

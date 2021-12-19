@@ -75,7 +75,7 @@ public class UploadProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_profile);
 
-        getSupportActionBar().setTitle("Cập nhật ảnh hồ sơ");
+        //getSupportActionBar().setTitle("Cập nhật ảnh hồ sơ");
 
 
         Button buttonUploadPic = findViewById(R.id.upload_pic_button);
@@ -219,7 +219,6 @@ public class UploadProfile extends AppCompatActivity {
     }
 
     public void callGallery() {
-        // gọi album ảnh
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

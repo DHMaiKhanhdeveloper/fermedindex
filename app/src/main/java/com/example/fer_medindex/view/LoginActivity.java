@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                         return;
                     }
                     if (firebaseUser.isEmailVerified()) {
-                        Toast.makeText(LoginActivity.this, "You are logged in now", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Bạn hãy đăng nhập ngay bây giờ", Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(LoginActivity.this, BackgroundDoctor.class));
                         PatientFormInput.clearForm();
@@ -138,10 +138,10 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Exception e = task.getException();
                     if (e instanceof FirebaseAuthInvalidUserException) {
-                        editTextLoginEmail.setError("User does not exists or is no longer valid.Please register again");
+                        editTextLoginEmail.setError("Người dùng không tồn tại hoặc không còn hợp lệ. Vui lòng đăng ký lại");
                         editTextLoginEmail.requestFocus();
                     } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                        editTextLoginEmail.setError("Invalid credentials. Kindly , check and re-enter");
+                        editTextLoginEmail.setError("Thông tin không hợp lệ. Vui lòng kiểm tra và nhập lại");
                         editTextLoginEmail.requestFocus();
                     } else {
                         Log.e(TAG, e.getMessage());
@@ -157,11 +157,11 @@ public class LoginActivity extends AppCompatActivity {
     private void showAlertDialog() {
         //thiết lập trình tạo cảnh báo
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setTitle("Email not Verified");
-        builder.setMessage("Please verify your email now. You can not login without email verification. ");
+        builder.setTitle("Email chưa được xác minh");
+        builder.setMessage("Vui lòng xác minh email của bạn ngay bây giờ. Bạn không thể đăng nhập mà không xác minh email. ");
 
 
-        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Tiếp tục", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -184,13 +184,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
         if (authProfile.getCurrentUser() != null) {
-            Toast.makeText(LoginActivity.this, "Already Logged In!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Đã đăng nhập!", Toast.LENGTH_SHORT).show();
 
 
             startActivity(new Intent(LoginActivity.this, BackgroundDoctor.class));
             finish();
         } else {
-            Toast.makeText(LoginActivity.this, "You can login now!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Bạn có thể đăng nhập ngay bây giờ!", Toast.LENGTH_SHORT).show();
         }
     }
 

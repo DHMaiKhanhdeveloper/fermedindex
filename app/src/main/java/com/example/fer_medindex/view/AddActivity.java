@@ -106,6 +106,7 @@ public class AddActivity extends AppCompatActivity {
     private String textGender;
     private Map<String, String> emotions;
     private Uri mPhotoUri;
+    private ImageView imageViewUploadPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,6 +229,7 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void init() {
+        imageViewUploadPic = findViewById(R.id.imageView_profile_user);
         imageProfile = findViewById(R.id.image_camera);
         editTextAddFullName = findViewById(R.id.editText_update_patient_full_name);
         editTextAddEmail = findViewById(R.id.editText_update_patient_email);
@@ -496,6 +498,7 @@ public class AddActivity extends AppCompatActivity {
                 xuLyAnh(bitmap);
                 tmpImg = this.decodeSampledBitmapFromUri(data.getData(), bitmap.getWidth(), bitmap.getHeight(), getContentResolver());
                 uriImage = data.getData();
+                imageViewUploadPic.setImageURI(uriImage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -551,7 +554,7 @@ public class AddActivity extends AppCompatActivity {
             }
         }
         try {
-            imageProfile.setImageBitmap(img);
+            imageViewUploadPic.setImageBitmap(img);
 
         } catch (Exception e) {
             e.printStackTrace();

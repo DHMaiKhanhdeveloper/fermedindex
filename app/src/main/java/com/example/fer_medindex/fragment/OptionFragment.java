@@ -62,14 +62,14 @@ public class OptionFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
             builder.setTitle("Exit App");
             builder.setMessage("Bạn chắc chắn muốn thoát");
-            builder.setPositiveButton("YES", (dialog, which) -> {
+            builder.setPositiveButton("Thoát", (dialog, which) -> {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(requireContext(), Background.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 requireActivity().finish();
             });
-            builder.setNegativeButton("NO", (dialog, which) -> dialog.cancel());
+            builder.setNegativeButton("Trở lại", (dialog, which) -> dialog.cancel());
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         });

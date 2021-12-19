@@ -129,18 +129,17 @@ public class ProfilePatient extends AppCompatActivity {
             }
 
             Button saveBtn = findViewById(R.id.save_btn);
-
+            if (TextUtils.isEmpty(TinhTrangBenh)) {
+                Toast.makeText(ProfilePatient.this, "Vui lòng nhập thông tin bệnh đầy đủ", Toast.LENGTH_LONG).show();
+                tinhTrangBenh.setError("Bắt buộc nhập thông tin tình trạng bệnh của bệnh nhân");
+                tinhTrangBenh.requestFocus();
+            }
             doctorView.setVisibility(View.VISIBLE);
             ReadWritePatientDetails readWritePatientDetails =
                     new ReadWritePatientDetails(fullName, doB, gender, mobile, cmnd, email,
                             address, status, imgHinh, TinhTrangBenh, emotions);
             readWritePatientDetails.patientId = patientId;
             saveBtn.setOnClickListener((v) -> {
-                if (TextUtils.isEmpty(TinhTrangBenh)) {
-                    Toast.makeText(ProfilePatient.this, "Vui lòng nhập thông tin bệnh đầy đủ", Toast.LENGTH_LONG).show();
-                    tinhTrangBenh.setError("Bắt buộc nhập thông tin tình trạng bệnh của bệnh nhân");
-                    tinhTrangBenh.requestFocus();
-                }
                 DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Patients");
                 referenceProfile.child(readWritePatientDetails.patientId).child("tinhtrangbenh").setValue(tinhTrangBenh.getText().toString()).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

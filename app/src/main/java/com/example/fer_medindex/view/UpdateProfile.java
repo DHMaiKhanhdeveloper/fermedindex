@@ -47,7 +47,7 @@ public class UpdateProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
-        getSupportActionBar().setTitle("Upload Profile Details");
+//        getSupportActionBar().setTitle("Upload Profile Details");
         progressBar = findViewById(R.id.progressBar);
         editTextUpdateName = findViewById(R.id.editText_update_profile_name);
         editTextUpdateDoB = findViewById(R.id.editText_update_profile_dob);

@@ -31,11 +31,11 @@ public class SelectPatient extends AppCompatActivity {
             if (patientDetails == null) {
                 new AlertDialog.Builder(SelectPatient.this)
                         .setMessage("Bạn chưa điền form nào, bạn có muốn điền một form không?")
-                        .setPositiveButton("OK", (dialog, which) -> {
+                        .setPositiveButton("Đồng ý", (dialog, which) -> {
                             Intent intent = new Intent(SelectPatient.this, Register_Patient.class);
                             startActivity(intent);
                         })
-                        .setNegativeButton("Cancel", (dialog, which) -> {
+                        .setNegativeButton("Thoát", (dialog, which) -> {
 
                         })
                         .create()

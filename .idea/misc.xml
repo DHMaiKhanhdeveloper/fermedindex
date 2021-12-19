@@ -47,6 +47,7 @@
         <entry key="..\:/deadline/Project/part8/app/src/main/res/layout/fragment_logout.xml" value="0.1" />
         <entry key="..\:/deadline/Project/part8/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.264" />
         <entry key="..\:/deadline/Project/part8/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1171875" />
+        <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable-v24/background_doctor.xml" value="0.2234375" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable-v24/background_patient.xml" value="0.21666666666666667" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable-v24/background_patientp1.xml" value="0.21666666666666667" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable-v24/background_patientp2.xml" value="0.21666666666666667" />
@@ -56,7 +57,7 @@
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable/button_background_blue.xml" value="0.2015625" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable/button_options.xml" value="0.1" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.228125" />
-        <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_add.xml" value="0.31547619047619047" />
+        <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_add.xml" value="0.2672413793103448" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_background.xml" value="0.18541666666666667" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_background_doctor.xml" value="0.1" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_change_password.xml" value="0.264" />
@@ -65,7 +66,7 @@
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_profile_doctor.xml" value="0.264" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_profile_patient.xml" value="0.23664749383730485" />
-        <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_register.xml" value="0.2567287784679089" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_register_patient.xml" value="0.38618925831202044" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_select_patient.xml" value="0.264" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/layout/activity_update_email.xml" value="0.4" />

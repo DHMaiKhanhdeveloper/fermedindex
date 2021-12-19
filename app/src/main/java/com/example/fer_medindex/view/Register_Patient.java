@@ -113,6 +113,7 @@ public class Register_Patient extends AppCompatActivity {
     private Pattern mobilePattern;
     private String textGender;
     private Map<String,String> emotions;
+    private ImageView imageViewUploadPic;
 
 
     @Override
@@ -258,7 +259,7 @@ public class Register_Patient extends AppCompatActivity {
 
         radioGroupRegisterGender = findViewById(R.id.radio_group_register_patient_gender);
         radioGroupRegisterGender.clearCheck();
-
+        imageViewUploadPic = findViewById(R.id.imageView_profile_user);
     }
     private String Status() {
         String status = "";
@@ -495,6 +496,7 @@ public class Register_Patient extends AppCompatActivity {
                 xuLyAnh(bitmap);
                 tmpImg = this.decodeSampledBitmapFromUri(data.getData(), bitmap.getWidth(), bitmap.getHeight(), getContentResolver());
                 uriImage = data.getData();
+                imageViewUploadPic.setImageURI(uriImage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -550,7 +552,7 @@ public class Register_Patient extends AppCompatActivity {
             }
         }
         try {
-            imageProfile.setImageBitmap(img);
+            imageViewUploadPic.setImageBitmap(img);
 
         } catch (Exception e) {
             e.printStackTrace();

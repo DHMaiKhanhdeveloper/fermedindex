@@ -81,20 +81,22 @@ public class RegisterActivity extends AppCompatActivity {
     public static final int SELECT_PICTURE = 123;
 
     private static final int REQUEST_PHOTO_GALLERY = 100;
-    ImageView imageProfile;
+    private ImageView imageProfile;
     private static final int REQUEST_CAPTURE_IMAGE = 110;
-    String textFullName;
-    String textEmail;
-    String textDoB;
-    String textMobile;
-    String textPassword;
-    String textConfirmPass;
-    String textGender;
-    String mobileRegex;
-    Matcher mobileMatcher;
-    Pattern mobilePattern;
+    private String textFullName;
+    private String textEmail;
+    private String textDoB;
+    private String textMobile;
+    private String textPassword;
+    private String textConfirmPass;
+    private String textGender;
+    private String mobileRegex;
+    private Matcher mobileMatcher;
+    private  Pattern mobilePattern;
     private Button buttonRegister;
     private StorageReference reference = FirebaseStorage.getInstance().getReference();
+    private ImageView imageViewUploadPic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextRegiterPass = findViewById(R.id.editText_register_password);
         editRegisterConfirmPass = findViewById(R.id.editText_register_confirm_password);
         progressBar = findViewById(R.id.progressBar);
+        imageViewUploadPic = findViewById(R.id.imageView_profile_user);
 
         radioGroupRegisterGender = findViewById(R.id.radio_group_register_gender);
         radioGroupRegisterGender.clearCheck();
@@ -457,6 +460,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 tmpImg = this.decodeSampledBitmapFromUri(data.getData(), bitmap.getWidth(), bitmap.getHeight(), getContentResolver());
                 uriImage = data.getData();
+                imageViewUploadPic.setImageURI(uriImage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -508,7 +512,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
         try {
-            imageProfile.setImageBitmap(img);
+            imageViewUploadPic.setImageBitmap(img);
 
         } catch (Exception e) {
             e.printStackTrace();
