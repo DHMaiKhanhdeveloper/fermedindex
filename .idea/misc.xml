@@ -15,6 +15,9 @@
         <entry key="..\:/AI/fer_medindex/app/src/main/res/layout/fragment_doctor.xml" value="0.1" />
         <entry key="..\:/AI/fer_medindex/app/src/main/res/layout/fragment_list_patient.xml" value="0.1" />
         <entry key="..\:/AI/fer_medindex/app/src/main/res/layout/fragment_logout.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Downloads/fer_medindex/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Downloads/fer_medindex/app/src/main/res/layout/activity_register_patient.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/Downloads/fer_medindex/app/src/main/res/layout/activity_select_patient.xml" value="0.1" />
         <entry key="..\:/deadline/Project/fer_medindex/app/src/main/res/layout/activity_profile_doctor.xml" value="0.20652173913043478" />
         <entry key="..\:/deadline/Project/part8/app/src/main/res/drawable-v24/background_doctor.xml" value="0.1" />
         <entry key="..\:/deadline/Project/part8/app/src/main/res/drawable-v24/background_patient.xml" value="0.1" />
@@ -47,6 +50,8 @@
         <entry key="..\:/deadline/Project/part8/app/src/main/res/layout/fragment_logout.xml" value="0.1" />
         <entry key="..\:/deadline/Project/part8/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.264" />
         <entry key="..\:/deadline/Project/part8/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1171875" />
+        <entry key="..\:/deadline/android/fer_medindex/fer_medindex/app/src/main/res/layout/activity_register_patient.xml" value="0.25416666666666665" />
+        <entry key="..\:/document/fer_medindex/fer_medindex/app/src/main/res/layout/activity_register_patient.xml" value="0.1" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable-v24/background_doctor.xml" value="0.2234375" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable-v24/background_patient.xml" value="0.21666666666666667" />
         <entry key="..\:/fer_medindex/fer_medindex/app/src/main/res/drawable-v24/background_patientp1.xml" value="0.21666666666666667" />

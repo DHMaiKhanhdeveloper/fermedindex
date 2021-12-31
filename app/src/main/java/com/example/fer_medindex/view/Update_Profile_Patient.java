@@ -140,10 +140,11 @@ public class Update_Profile_Patient extends AppCompatActivity {
                 int month = Integer.parseInt(textSADoB[1])-1; // tháng trong mảng index bắt đầu từ 0
                 int year = Integer.parseInt(textSADoB[2]);
 
+                int style = android.app.AlertDialog.THEME_HOLO_LIGHT;
                 DatePickerDialog picker;
 
                 //Date Picker Dialog
-                picker = new DatePickerDialog(Update_Profile_Patient.this, new DatePickerDialog.OnDateSetListener() {
+                picker = new DatePickerDialog(Update_Profile_Patient.this,style, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         editTextRegisterDoB.setText(dayOfMonth+ "/"+(month+1)+"/"+year);

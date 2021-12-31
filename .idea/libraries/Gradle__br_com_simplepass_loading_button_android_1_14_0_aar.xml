@@ -10,6 +10,9 @@
       <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.2-bin/caches/transforms-3/ec672351cbf220cdc14cf7828980ae85/transformed/jetified-loading-button-android-1.14.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.2-bin/caches/transforms-3/ec672351cbf220cdc14cf7828980ae85/transformed/jetified-loading-button-android-1.14.0/res" />
       <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.2-bin/caches/transforms-3/ec672351cbf220cdc14cf7828980ae85/transformed/jetified-loading-button-android-1.14.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/23f73ba9d0fcef1ad6d894f32b31ea27/transformed/jetified-loading-button-android-1.14.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/23f73ba9d0fcef1ad6d894f32b31ea27/transformed/jetified-loading-button-android-1.14.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/23f73ba9d0fcef1ad6d894f32b31ea27/transformed/jetified-loading-button-android-1.14.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-7.2-bin/caches/modules-2/files-2.1/br.com.simplepass/loading-button-android/1.14.0/4352042538ce3ae84a0fec3d9f99b559443acdd2/loading-button-android-1.14.0-javadoc.jar!/" />

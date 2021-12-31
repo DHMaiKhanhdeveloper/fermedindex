@@ -146,7 +146,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:elevation="10dp"
+                    android:elevation="20dp"
                     android:visibility="gone" />
             </RelativeLayout>
 

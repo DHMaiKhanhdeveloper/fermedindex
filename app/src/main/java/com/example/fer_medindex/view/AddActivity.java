@@ -134,19 +134,19 @@ public class AddActivity extends AppCompatActivity {
             textTinhTrang = editTextAddTinhTrangBenh.getText().toString();
 
             mobileRegex = "[0][0-9]{9}";
-            mobilePattern = Pattern.compile(mobileRegex); // xác định mẫu di động
+            mobilePattern = Pattern.compile(mobileRegex);
             mobileMatcher = mobilePattern.matcher(textMobile);
 
 
             if (TextUtils.isEmpty(textFullName)) {
                 Toast.makeText(AddActivity.this, "Vui lòng nhập đầy đủ họ và tên của bạn", Toast.LENGTH_LONG).show();
                 editTextAddFullName.setError("Bắt buộc nhập họ và tên");
-                editTextAddFullName.requestFocus();// yeu cau nhap lai
+                editTextAddFullName.requestFocus();
             } else if (TextUtils.isEmpty((textEmail))) {
                 Toast.makeText(AddActivity.this, "Vui lòng nhập email của bạn", Toast.LENGTH_LONG).show();
                 editTextAddEmail.setError("Bắt buộc nhập email");
                 editTextAddEmail.requestFocus();
-            } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) { // khác true
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) {
                 Toast.makeText(AddActivity.this, "Vui lòng nhập lại email của bạn", Toast.LENGTH_LONG).show();
                 editTextAddEmail.setError(" email không hợp lệ");
                 editTextAddEmail.requestFocus();
@@ -222,7 +222,7 @@ public class AddActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         editTextAddDoB.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
-                }, year, month, day); // 3 tham số xác định
+                }, year, month, day);
                 picker.show();
             }
         });
@@ -294,17 +294,13 @@ public class AddActivity extends AppCompatActivity {
                                         intent.putExtra(ProfilePatient.TINH_TRANG_BENH, writerPatientDetails.getTinhtrangbenh());
                                         intent.putExtra(ProfilePatient.IS_SHOW_TINH_TRANG_BENH, getIntent().getBooleanExtra(TINH_TRANG_BENH, false));
                                         intent.putExtra(ProfilePatient.IS_FULL_PROFILE, true);
-                                        //intent.putExtra(ProfilePatient.)
-                                        //put profile patient to intent
-                                        // Ngan nguoi dung dang ki thanh cong khong quay lai dang ki lai lan nua , nguoi dung dang ki thanh cong se chuyen den trang ho so
-//                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY| Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
-                                        finish(); // dong hoat dong Register
+                                        finish();
                                     } else {
                                         Toast.makeText(AddActivity.this, "Người dùng đăng ký không thành công, Vui lòng thử lại", Toast.LENGTH_LONG).show();
                                     }
-                                    // ẩn progressBar khi người dùng đăng kí thành công hoặc thất bại
                                     progressBar.setVisibility(View.GONE);
 
                                 });

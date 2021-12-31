@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //for changing status bar icon colors
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Bạn hãy đăng nhập ngay bây giờ", Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(LoginActivity.this, BackgroundDoctor.class));
-                        PatientFormInput.clearForm();
+                        //PatientFormInput.clearForm();
                         finish();
                         return;
                         // mở hồ sơ người dùng

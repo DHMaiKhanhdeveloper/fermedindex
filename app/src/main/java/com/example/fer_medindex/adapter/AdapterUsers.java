@@ -83,69 +83,69 @@ public class AdapterUsers extends FirebaseRecyclerAdapter<ReadWritePatientDetail
 
 
         });
-        holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img1.getContext())
-                        .setContentHolder(new ViewHolder(R.layout.update))
-                        .setExpanded(true,1400)
-                        .create();
-
-
-                View view = dialogPlus.getHolderView();
-                EditText name = view.findViewById(R.id.editText_register_patient_full_name);
-                EditText ngaysinh = view.findViewById(R.id.editText_register_patient_dob);
-                EditText sodienthoai = view.findViewById(R.id.editText_register_patient_mobile);
-                EditText gioitinh = view.findViewById(R.id.editText_register_patient_gioitinh);
-                EditText CMND = view.findViewById(R.id.editText_register_patient_passport);
-                EditText diachi = view.findViewById(R.id.editText_register_patient_address);
-                EditText email = view.findViewById(R.id.editText_register_patient_email);
-                EditText trangthai = view.findViewById(R.id.editText_register_patient_tinh_trang);
-                Button btnUpdate = view.findViewById(R.id.button_update_patient);
-
-                name.setText(model.getFullname());
-                ngaysinh.setText(model.getNgaysinh());
-                gioitinh.setText(model.getGioitinh());
-                sodienthoai.setText(model.getSodienthoai());
-                CMND.setText(model.getCMND());
-                diachi.setText(model.getDiachi());
-                email.setText(model.getEmail());
-                trangthai.setText(model.getTrangthai());
-
-                dialogPlus.show();
-                btnUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Map<String,Object> map = new HashMap<>();
-                        map.put("fullname",name.getText().toString());
-                        map.put("sodienthoai",sodienthoai.getText().toString());
-                        map.put("ngaysinh",ngaysinh.getText().toString());
-                        map.put("gioitinh",gioitinh.getText().toString());
-                        map.put("cmnd",CMND.getText().toString());
-                        map.put("diachi",diachi.getText().toString());
-                        map.put("email",email.getText().toString());
-                        map.put("trangthai",trangthai.getText().toString());
-
-                        FirebaseDatabase.getInstance().getReference().child("Patients")
-                                .child(getRef(holder.getAdapterPosition()).getKey()).updateChildren(map)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(holder.textfullname.getContext(), "Dữ liệu được cập nhật thành công", Toast.LENGTH_SHORT).show();
-                                        dialogPlus.dismiss();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(holder.textfullname.getContext(), "Lỗi không cập nhật được", Toast.LENGTH_SHORT).show();
-                                        dialogPlus.dismiss();
-                                    }
-                                });
-                    }
-                });
-            }
-        });
+//        holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img1.getContext())
+//                        .setContentHolder(new ViewHolder(R.layout.update))
+//                        .setExpanded(true,800)
+//                        .create();
+//
+//
+//                View view = dialogPlus.getHolderView();
+//                EditText name = view.findViewById(R.id.editText_register_patient_full_name);
+//                EditText ngaysinh = view.findViewById(R.id.editText_register_patient_dob);
+//                EditText sodienthoai = view.findViewById(R.id.editText_register_patient_mobile);
+//                EditText gioitinh = view.findViewById(R.id.editText_register_patient_gioitinh);
+//                EditText CMND = view.findViewById(R.id.editText_register_patient_passport);
+//                EditText diachi = view.findViewById(R.id.editText_register_patient_address);
+//                EditText email = view.findViewById(R.id.editText_register_patient_email);
+//                EditText trangthai = view.findViewById(R.id.editText_register_patient_tinh_trang);
+//                Button btnUpdate = view.findViewById(R.id.button_update_patient);
+//
+//                name.setText(model.getFullname());
+//                ngaysinh.setText(model.getNgaysinh());
+//                gioitinh.setText(model.getGioitinh());
+//                sodienthoai.setText(model.getSodienthoai());
+//                CMND.setText(model.getCMND());
+//                diachi.setText(model.getDiachi());
+//                email.setText(model.getEmail());
+//                trangthai.setText(model.getTrangthai());
+//
+//                dialogPlus.show();
+//                btnUpdate.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Map<String,Object> map = new HashMap<>();
+//                        map.put("fullname",name.getText().toString());
+//                        map.put("sodienthoai",sodienthoai.getText().toString());
+//                        map.put("ngaysinh",ngaysinh.getText().toString());
+//                        map.put("gioitinh",gioitinh.getText().toString());
+//                        map.put("cmnd",CMND.getText().toString());
+//                        map.put("diachi",diachi.getText().toString());
+//                        map.put("email",email.getText().toString());
+//                        map.put("trangthai",trangthai.getText().toString());
+//
+//                        FirebaseDatabase.getInstance().getReference().child("Patients")
+//                                .child(getRef(holder.getAdapterPosition()).getKey()).updateChildren(map)
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void unused) {
+//                                        Toast.makeText(holder.textfullname.getContext(), "Dữ liệu được cập nhật thành công", Toast.LENGTH_SHORT).show();
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        Toast.makeText(holder.textfullname.getContext(), "Lỗi không cập nhật được", Toast.LENGTH_SHORT).show();
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                });
+//                    }
+//                });
+//            }
+//        });
         holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,7 +195,7 @@ public class AdapterUsers extends FirebaseRecyclerAdapter<ReadWritePatientDetail
             textmobile = itemView.findViewById(R.id.mobileTv);
             cardView = itemView.findViewById(R.id.cardView_patient);
 
-            imageViewEdit = itemView.findViewById(R.id.edit);
+           // imageViewEdit = itemView.findViewById(R.id.edit);
             imageViewDelete = itemView.findViewById(R.id.delete);
         }
     }

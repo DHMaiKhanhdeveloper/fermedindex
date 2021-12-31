@@ -28,9 +28,9 @@
                 android:layout_height="300dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="70dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="100dp"
                 android:gravity="center"
-                android:text="@string/hay_dang_ky_form"
+                android:text="Hãy đăng kí Form ngay bây giờ"
                 android:textColor="@color/background_patient"
                 android:textSize="35sp"
                 android:textStyle="bold" />
@@ -46,7 +46,6 @@
         android:baselineAligned="false">
 
         <RelativeLayout
-
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -54,7 +53,7 @@
             tools:ignore="NestedWeights,UselessParent">
 
             <RelativeLayout
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="80dp"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_alignParentBottom="true"
@@ -104,6 +103,7 @@
             tools:ignore="NestedWeights,UselessParent">
 
             <RelativeLayout
+                android:layout_marginBottom="90dp"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_alignParentTop="true"
@@ -136,51 +136,51 @@
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:baselineAligned="false">-->
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_weight="1"
-            tools:ignore="NestedWeights,UselessParent">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            tools:ignore="NestedWeights,UselessParent">-->
 
-            <RelativeLayout
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
-                android:background="@drawable/background_patientp3">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="300dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_alignParentTop="true"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:background="@drawable/background_patientp3">-->
 
-                <ImageView
-                    android:id="@+id/danh_sach_benh_nhan"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/background_patientp3"
-                    app:tint="#68000000" />
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/background_patientp3">
+<!--                <ImageView-->
+<!--                    android:id="@+id/danh_sach_benh_nhan"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:contentDescription="@string/todo"-->
+<!--                    android:src="@drawable/background_patientp3"-->
+<!--                    app:tint="#68000000" />-->
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:background="@drawable/background_patientp3">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="DANH SÁCH BỆNH NHÂN"
-                        android:textColor="#0C0C0C"
-                        android:textSize="23sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="LỊCH SỬ KHÁM BỆNH"-->
+<!--                        android:textColor="#0C0C0C"-->
+<!--                        android:textSize="23sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </RelativeLayout>-->
 
-            </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
+<!--            </RelativeLayout>-->
+<!--        </RelativeLayout>-->
+<!--    </LinearLayout>-->
 </LinearLayout>

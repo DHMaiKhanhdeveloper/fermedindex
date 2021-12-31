@@ -135,17 +135,22 @@ public class Register_Patient extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Calendar calendar = Calendar.getInstance();
+                //final  DatePicker datePicker = findViewById(R.id.datePicker);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
+                int style = android.app.AlertDialog.THEME_HOLO_LIGHT;
+
+
+
                 //Date Picker Dialog
-                picker = new DatePickerDialog(Register_Patient.this, new DatePickerDialog.OnDateSetListener() {
+                picker = new DatePickerDialog(Register_Patient.this,style, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         editTextRegisterDoB.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
-                }, year, month, day); // 3 tham số xác định
+                }, year, month, day);
                 picker.show();
 
             }
@@ -155,6 +160,8 @@ public class Register_Patient extends AppCompatActivity {
         buttonRegisterPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonRegisterPatient.setText("Vui lòng đợi...");
+                v.setEnabled(false);
                 int selectedGenderId = radioGroupRegisterGender.getCheckedRadioButtonId();
                 radioButtonRegisterGenderSelected = findViewById(selectedGenderId);
                 textFullName = editTextRegisterFullName.getText().toString();
@@ -180,59 +187,74 @@ public class Register_Patient extends AppCompatActivity {
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập đầy đủ họ và tên của bạn", Toast.LENGTH_LONG).show();
                     editTextRegisterFullName.setError("Bắt buộc nhập họ và tên");
                     editTextRegisterFullName.requestFocus();// yeu cau nhap lai
+                    v.setEnabled(true);
                 } else if (TextUtils.isEmpty((textEmail))) {
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập email của bạn", Toast.LENGTH_LONG).show();
                     editTextRegisterEmail.setError("Bắt buộc nhập email");
                     editTextRegisterEmail.requestFocus();
+                    v.setEnabled(true);
                 } else if (!Patterns.EMAIL_ADDRESS.matcher(textEmail).matches()) { // khác true
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập lại email của bạn", Toast.LENGTH_LONG).show();
                     editTextRegisterEmail.setError(" email không hợp lệ");
                     editTextRegisterEmail.requestFocus();
+                    v.setEnabled(true);
                 } else if (TextUtils.isEmpty(textDoB)) {
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập ngày sinh của bạn", Toast.LENGTH_LONG).show();
                     editTextRegisterDoB.setError("Bắt buộc nhập ngày sinh");
                     editTextRegisterDoB.requestFocus();
+                    v.setEnabled(true);
                 } else if (radioGroupRegisterGender.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(Register_Patient.this, "Vui lòng chọn giới tính của bạn", Toast.LENGTH_LONG).show();
                     radioButtonRegisterGenderSelected.setError("Bắt buộc phải chọn giới tính");
                     radioButtonRegisterGenderSelected.requestFocus();
+                    v.setEnabled(true);
                 } else if (TextUtils.isEmpty(textMobile)) {
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập số điện thoại của bạn ", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Bắt buộc nhập số điện thoại");
                     editTextRegisterMobile.requestFocus();
+                    v.setEnabled(true);
                 } else if (textMobile.length() != 10) {
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập số điện thoại của bạn ", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Điện thoại di động phải có 10 chữ số");
                     editTextRegisterMobile.requestFocus();
+                    v.setEnabled(true);
                 } else if (!mobileMatcher.find()) {
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập số điện thoại của bạn ", Toast.LENGTH_LONG).show();
                     editTextRegisterMobile.setError("Điện thoại di động không hợp lệ");
                     editTextRegisterMobile.requestFocus();
+                    v.setEnabled(true);
                 } else if (TextUtils.isEmpty((textCMND))) {
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập CMND của bạn", Toast.LENGTH_LONG).show();
                     editTextRegisterEmail.setError("Bắt buộc nhập CMND");
                     editTextRegisterEmail.requestFocus();
+                    v.setEnabled(true);
                 } else if (TextUtils.isEmpty((textAddress))) {
                     Toast.makeText(Register_Patient.this, "Vui lòng nhập địa chỉ của bạn", Toast.LENGTH_LONG).show();
                     editTextRegisterEmail.setError("Bắt buộc nhập địa chỉ");
                     editTextRegisterEmail.requestFocus();
+                    v.setEnabled(true);
                 } else if (!checkBoxHo.isChecked() && !checkBoxSot.isChecked() && !checkboxdaunguoi.isChecked() && !checkBoxKhotho.isChecked() && !checkboxdaunguoi.isChecked() && !checkboxsuckhoetot.isChecked()) {
                     Toast.makeText(Register_Patient.this, "Vui lòng chọn tình trạng hiện tại của bạn", Toast.LENGTH_LONG).show();
                     editTextRegisterEmail.setError("Bắt buộc chọn tình trạng hiện tại");
                     editTextRegisterEmail.requestFocus();
+                    v.setEnabled(true);
                 } else if (!checkboxcamket.isChecked()) {
                     Toast.makeText(Register_Patient.this, "Vui lòng chọn cam kết những thông tin khai là đúng sự thật", Toast.LENGTH_LONG).show();
                     editTextRegisterEmail.setError("Bắt buộc chọn cam kết");
                     editTextRegisterEmail.requestFocus();
+                    v.setEnabled(true);
                 } else if (TextUtils.isEmpty(textSot) && TextUtils.isEmpty(textHo) && TextUtils.isEmpty(textKhotho) && TextUtils.isEmpty(textDaunguoi) && TextUtils.isEmpty(textSuckhoetot)) {
                     Toast.makeText(Register_Patient.this, "Vui lòng chọn tình trạng hiện tại của bạn", Toast.LENGTH_LONG).show();
                     editTextRegisterEmail.setError("Bắt buộc chọn tình trạng hiện tại");
                     editTextRegisterEmail.requestFocus();
+                    v.setEnabled(true);
                 } else if (TextUtils.isEmpty(textcamket)) {
                     Toast.makeText(Register_Patient.this, "Vui lòng chọn cam kết những thông tin khai là đúng sự thật", Toast.LENGTH_LONG).show();
                     editTextRegisterEmail.setError("Bắt buộc chọn cam kết");
                     editTextRegisterEmail.requestFocus();
+                    v.setEnabled(true);
                 } else {
+
                     uploadToFirebase(uriImage);
                 }
             }
@@ -315,8 +337,6 @@ public class Register_Patient extends AppCompatActivity {
                                         intent.putExtra(ProfilePatient.CREATE_TIME,writerPatientDetails.getCreateTimeString());
                                         intent.putExtra(ProfilePatient.EMOTION,(Serializable)writerPatientDetails.getEmotions());
 
-                                        // Ngan nguoi dung dang ki thanh cong khong quay lai dang ki lai lan nua , nguoi dung dang ki thanh cong se chuyen den trang ho so
-                                        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY| Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();
